@@ -4,14 +4,18 @@ import java.util.Collection;
 import java.util.Hashtable;
 
 public class DGraph implements graph{
-	Hashtable<Integer, Integer> Node = new Hashtable<Integer, Integer>();
-	private int ID;
-	private int KEY;
+	Hashtable<Integer, Node_data_> hash = new Hashtable<Integer, Node_data_>();
+	Node_data_ NODE;
 	
+	public DGraph( Node_data_ NODE) {
+		hash.put(NODE.getKey(), NODE);
+	}
 	
 	@Override
 	public node_data getNode(int key) {
-		// TODO Auto-generated method stub
+		if (key != 0) {
+			return hash.get(key);
+		}
 		return null;
 	}
 
