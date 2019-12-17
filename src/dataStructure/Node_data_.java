@@ -14,13 +14,13 @@ public class Node_data_ implements node_data {
 	@Override
 	public Point3D getLocation() {
 		// TODO Auto-generated method stub
-		return null;
+		return this.POINT3D;
 	}
 
 	@Override
 	public void setLocation(Point3D p) {
 		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
