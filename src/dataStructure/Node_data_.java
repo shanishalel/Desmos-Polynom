@@ -3,11 +3,12 @@ package dataStructure;
 import utils.Point3D;
 
 public class Node_data_ implements node_data {
+	private int KEY;
+	private Point3D POINT3D;
 
 	@Override
 	public int getKey() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.KEY;
 	}
 
 	@Override
@@ -19,7 +20,7 @@ public class Node_data_ implements node_data {
 	@Override
 	public void setLocation(Point3D p) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -31,7 +32,7 @@ public class Node_data_ implements node_data {
 	@Override
 	public void setWeight(double w) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -43,7 +44,7 @@ public class Node_data_ implements node_data {
 	@Override
 	public void setInfo(String s) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class Node_data_ implements node_data {
 	@Override
 	public void setTag(int t) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

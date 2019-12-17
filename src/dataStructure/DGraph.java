@@ -1,9 +1,14 @@
 package dataStructure;
 
 import java.util.Collection;
+import java.util.Hashtable;
 
 public class DGraph implements graph{
-
+	Hashtable<Integer, Integer> Node = new Hashtable<Integer, Integer>();
+	private int ID;
+	private int KEY;
+	
+	
 	@Override
 	public node_data getNode(int key) {
 		// TODO Auto-generated method stub
