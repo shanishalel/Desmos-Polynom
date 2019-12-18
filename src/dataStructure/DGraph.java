@@ -1,13 +1,15 @@
 package dataStructure;
 
+
 import java.util.Collection;
 import java.util.Hashtable;
 
+
 public class DGraph implements graph{
 	//this hash will represents the node
-	Hashtable<Integer, node_data> hash = new Hashtable<Integer, node_data>();
+	Hashtable<Integer, node_data> Nodes = new Hashtable<Integer, node_data>();
 
-	/*The function represent an edges by Hashtable <Integer, Hashtable<Node_data_, Edge_Data_>>  */
+	/*The function represent an edges by Hashtable<node_data, Hashtable<Integer, edge_data>>   */
 	Hashtable<node_data, Hashtable<Integer, edge_data>>  Edge= new Hashtable<node_data, Hashtable<Integer, edge_data>>();
 
 //	public DGraph() {
@@ -17,46 +19,51 @@ public class DGraph implements graph{
 	@Override
 	public node_data getNode(int key) {
 		if (key != 0) {
-			return hash.get(key);
+			return Nodes.get(key);
 		}
 		return null;
 	}
 
 	@Override
 	public edge_data getEdge(int src, int dest) {
-		node_data Src = hash.get(src);
-		Edge_Data_ edge = Edge.get(Src).get(dest);
+		node_data Src = Nodes.get(src);
+		edge_data edge = Edge.get(Src).get(dest);
 		return edge;
 	}
 
 	@Override
 	public void addNode(node_data n) {
-		Node_data_ ver = (Node_data_) n; 
-		hash.put(n.getKey(), ver);
+		Nodes ver = (Nodes) n; 
+		Nodes.put(n.getKey(), ver);
 	}
 
 	@Override
 	public void connect(int src, int dest, double w) {
-		Edge_Data_ edge = new Edge_Data_(hash.get(src) , hash.get(dest), w);
-		Hashtable<Integer, Edge_Data_> table= new Hashtable<Integer, Edge_Data_>();
+		edge_data edge = new Edges(Nodes.get(src) , Nodes.get(dest), w);
+		Hashtable<Integer, edge_data> table= new Hashtable<Integer, edge_data>();
 		table.put(dest, edge);
-		Edge.put(hash.get(src), table );
+		Edge.put(Nodes.get(src), table );
 	}
 
 	@Override
 	public Collection<node_data> getV() {
-		return hash.values();
+		return Nodes.values();
 	}
 
 	@Override
 	public Collection<edge_data> getE(int node_id) {
-		// TODO Auto-generated method stub
-		return null;
+		return Edge.get(node_id).values();
 	}
-
+	
+	
+	//start from here
 	@Override
 	public node_data removeNode(int key) {
-		// TODO Auto-generated method stub
+		/*we will run on the Hashtable of the edges and check for every edge if the source or the dest is 
+		   the node of the key that we get*/
+		
+		
+		
 		return null;
 	}
 

@@ -2,14 +2,14 @@ package dataStructure;
 
 import utils.Point3D;
 
-public class Node_data_ implements node_data {
+public class Nodes implements node_data {
 	private Integer KEY;
 	private Point3D POINT3D;
 	private double WEIGHT;
 	private String INFO;
 	private int TAG;
 	
-	public Node_data_(Integer KEY ,Point3D POINT3D , double WEIGHT) {
+	public Nodes(Integer KEY ,Point3D POINT3D , double WEIGHT) {
 		this.KEY = KEY;
 		this.POINT3D = POINT3D;
 		this.WEIGHT =WEIGHT;

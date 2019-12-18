@@ -1,6 +1,6 @@
 package dataStructure;
 
-public class Edge_Data_ implements edge_data {
+public class Edges implements edge_data {
 	
 	private node_data SRC;
 	private node_data DEST;
@@ -8,7 +8,7 @@ public class Edge_Data_ implements edge_data {
 	private String INFO;
 	private int TAG;
 	
-	public Edge_Data_ (node_data SRC, node_data DEST, double WEIGHT) {
+	public Edges (node_data SRC, node_data DEST, double WEIGHT) {
 		this.SRC = SRC;
 		this.DEST = DEST;
 		this.WEIGHT =WEIGHT;
