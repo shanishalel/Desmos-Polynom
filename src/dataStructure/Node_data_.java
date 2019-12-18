@@ -7,6 +7,7 @@ public class Node_data_ implements node_data {
 	private Point3D POINT3D;
 	private double WEIGHT;
 	private String INFO;
+	private int TAG;
 	
 	public Node_data_(Integer KEY ,Point3D POINT3D , double WEIGHT) {
 		this.KEY = KEY;
@@ -57,14 +58,12 @@ public class Node_data_ implements node_data {
 
 	@Override
 	public int getTag() {
-		// TODO Auto-generated method stub
-		return 0;
+		return TAG;
 	}
 
 	@Override
 	public void setTag(int t) {
-		// TODO Auto-generated method stub
-
+		this.TAG=t;
 	}
 
 }
