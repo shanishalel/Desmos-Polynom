@@ -3,6 +3,7 @@ package dataStructure;
 
 import java.util.Collection;
 import java.util.Hashtable;
+import java.util.Set;
 
 
 public class DGraph implements graph{
@@ -56,27 +57,26 @@ public class DGraph implements graph{
 	}
 	
 	
-	//start from here
+	//not finished
 	@Override
 	public node_data removeNode(int key) {
 		/*we will run on the Hashtable of the edges and check for every edge if the source or the dest is 
 		   the node of the key that we get*/
-		
-		
+		node_data to_remove=Nodes.get(key); //the node that we need to remove
+		Edge.remove(to_remove);
 		
 		return null;
 	}
 
 	@Override
 	public edge_data removeEdge(int src, int dest) {
-		// TODO Auto-generated method stub
-		return null;
+		node_data srcNode= Nodes.get(src); //get the node_data of src
+		return Edge.get(srcNode).remove(dest); //remove the edge that start from src and ends in dest
 	}
 
 	@Override
 	public int nodeSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return Nodes.size();
 	}
 
 	@Override
