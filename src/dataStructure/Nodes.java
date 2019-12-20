@@ -13,6 +13,8 @@ public class Nodes implements node_data {
 		this.KEY = KEY;
 		this.POINT3D = POINT3D;
 		this.WEIGHT =WEIGHT;
+		this.INFO ="";
+		this.TAG = 999999999;
 	}
 
 	@Override

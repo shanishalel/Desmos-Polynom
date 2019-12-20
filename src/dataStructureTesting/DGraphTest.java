@@ -4,6 +4,10 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.jupiter.api.Test;
 
+import dataStructure.DGraph;
+import dataStructure.Nodes;
+import utils.Point3D;
+
 class DGraphTest {
 
 	@Test
@@ -18,12 +22,29 @@ class DGraphTest {
 
 	@Test
 	void testAddNode() {
-		fail("Not yet implemented");
+		DGraph d = new DGraph();
+		int j=1;
+		for (int i =1 ; i<10 ;i++){
+			Point3D p = new Point3D(j, j, j);
+		    Nodes n = new Nodes(i , p , i);
+		    d.addNode(n);
+		}
 	}
 
 	@Test
 	void testConnect() {
-		fail("Not yet implemented");
+		DGraph d = new DGraph();
+		int j=1;
+		for (int i =1 ; i<10 ;i++){
+			Point3D p = new Point3D(j, j, j);
+		    Nodes n = new Nodes(i , p , i);
+		    d.addNode(n);
+		}
+		for(int i =1 ; i <d.nodeSize() ;i++) {
+			 if (i+1 <d.nodeSize()) {
+			d.connect(i, i+1, i);
+			 }
+		}
 	}
 
 	@Test
@@ -38,24 +59,56 @@ class DGraphTest {
 
 	@Test
 	void testRemoveNode() {
-		fail("Not yet implemented");
+		DGraph d = new DGraph();
+		int j=1;
+		for (int i =1 ; i<10 ;i++){
+			Point3D p = new Point3D(j, j, j);
+		    Nodes n = new Nodes(i , p , i);
+		    d.addNode(n);
+		}
+		if (d.nodeSize() != 9) {
+			fail();
+		}
+		d.removeNode(6);
+		if (d.nodeSize() != 8) {
+			fail();
+		}
 	}
 
 	@Test
 	void testRemoveEdge() {
-		fail("Not yet implemented");
+		DGraph d = new DGraph();
+		int j=1;
+		for (int i =1 ; i<10 ;i++){
+			Point3D p = new Point3D(j, j, j);
+		    Nodes n = new Nodes(i , p , i);
+		    d.addNode(n);
+		}
+		for(int i =1 ; i <d.nodeSize() ;i++) {
+			d.connect(1, i, i);
+		}
+		d.removeNode(1);
 	}
 
 	@Test
 	void testNodeSize() {
-		fail("Not yet implemented");
+		DGraph d = new DGraph();
+		int j=1;
+		for (int i =1 ; i<10 ;i++){
+			Point3D p = new Point3D(j, j, j);
+		    Nodes n = new Nodes(i , p , i);
+		    d.addNode(n);
+		}
+		if (d.nodeSize() != 9) {
+			fail();
+		}
 	}
 
 	@Test
 	void testEdgeSize() {
 		fail("Not yet implemented");
 	}
-
+	
 	@Test
 	void testGetMC() {
 		fail("Not yet implemented");

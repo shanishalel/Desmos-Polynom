@@ -64,6 +64,7 @@ public class DGraph implements graph{
 		   the node of the key that we get*/
 		node_data to_remove=Nodes.get(key); //the node that we need to remove
 		Edge.remove(to_remove);
+		Nodes.remove(key);
 		
 		return null;
 	}
