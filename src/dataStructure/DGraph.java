@@ -2,11 +2,13 @@ package dataStructure;
 
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Set;
 
 
 public class DGraph implements graph{
+	private int countEdge=0;
 	//this hash will represents the node
 	Hashtable<Integer, node_data> Nodes = new Hashtable<Integer, node_data>();
 
@@ -44,6 +46,7 @@ public class DGraph implements graph{
 		Hashtable<Integer, edge_data> table= new Hashtable<Integer, edge_data>();
 		table.put(dest, edge);
 		Edge.put(Nodes.get(src), table );
+		countEdge++;
 	}
 
 	@Override
@@ -62,10 +65,16 @@ public class DGraph implements graph{
 	public node_data removeNode(int key) {
 		/*we will run on the Hashtable of the edges and check for every edge if the source or the dest is 
 		   the node of the key that we get*/
+		if (Nodes.containsKey(key)) {
 		node_data to_remove=Nodes.get(key); //the node that we need to remove
 		Edge.remove(to_remove);
 		Nodes.remove(key);
-		
+		}
+		for (Hashtable<Integer, edge_data> hash : Edge.values()) {
+			if (hash.containsKey(key)) {
+			hash.remove(key);
+			}
+		}
 		return null;
 	}
 

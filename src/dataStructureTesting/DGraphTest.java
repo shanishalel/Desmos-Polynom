@@ -24,27 +24,29 @@ class DGraphTest {
 	void testAddNode() {
 		DGraph d = new DGraph();
 		int j=1;
-		for (int i =1 ; i<10 ;i++){
+		for (int i =1 ; i<=1000000 ;i++){
 			Point3D p = new Point3D(j, j, j);
 		    Nodes n = new Nodes(i , p , i);
 		    d.addNode(n);
 		}
+		System.out.println(d.nodeSize());
 	}
 
 	@Test
 	void testConnect() {
 		DGraph d = new DGraph();
 		int j=1;
-		for (int i =1 ; i<10 ;i++){
+		for (int i =1 ; i<=10 ;i++){
 			Point3D p = new Point3D(j, j, j);
 		    Nodes n = new Nodes(i , p , i);
 		    d.addNode(n);
 		}
-		for(int i =1 ; i <d.nodeSize() ;i++) {
-			 if (i+1 <d.nodeSize()) {
-			d.connect(i, i+1, i);
-			 }
+		for(int i =1 ; i <=d.nodeSize() ;i++) {
+//			 if (i+1 <d.nodeSize()) {
+			d.connect(1, i, i);
+//			 }
 		}
+		System.out.println(d.edgeSize());
 	}
 
 	@Test
@@ -54,7 +56,16 @@ class DGraphTest {
 
 	@Test
 	void testGetE() {
-		fail("Not yet implemented");
+		DGraph d = new DGraph();
+		int j=1;
+		for (int i =1 ; i<10 ;i++){
+			Point3D p = new Point3D(j, j, j);
+		    Nodes n = new Nodes(i , p , i);
+		    d.addNode(n);
+		}
+		for(int i =1 ; i <d.nodeSize() ;i++) {
+			d.connect(1, i, i);
+		}
 	}
 
 	@Test
