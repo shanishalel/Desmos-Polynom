@@ -12,7 +12,7 @@ public class DGraph implements graph{
 	//this hash will represents the node
 	Hashtable<Integer, node_data> Nodes = new Hashtable<Integer, node_data>();
 
-	/*The function represent an edges by Hashtable<node_data, Hashtable<Integer, edge_data>>   */
+	/*The hash represent an edges by Hashtable<node_data, Hashtable<Integer, edge_data>>   */
 	Hashtable<node_data, Hashtable<Integer, edge_data>>  Edge= new Hashtable<node_data, Hashtable<Integer, edge_data>>();
 
 //	public DGraph() {
@@ -56,7 +56,7 @@ public class DGraph implements graph{
 
 	@Override
 	public Collection<edge_data> getE(int node_id) {
-		return Edge.get(node_id).values();
+		return 	Edge.get(Nodes.get(node_id)).values();
 	}
 	
 	
@@ -78,10 +78,13 @@ public class DGraph implements graph{
 		return null;
 	}
 
+	//the function isn't right
 	@Override
 	public edge_data removeEdge(int src, int dest) {
 		node_data srcNode= Nodes.get(src); //get the node_data of src
+		this.countEdge--;
 		return Edge.get(srcNode).remove(dest); //remove the edge that start from src and ends in dest
+		
 	}
 
 	@Override
@@ -91,13 +94,11 @@ public class DGraph implements graph{
 
 	@Override
 	public int edgeSize() {
-		// TODO Auto-generated method stub
-		return 0;
+		return this.countEdge;
 	}
 
 	@Override
 	public int getMC() {
-		// TODO Auto-generated method stub
 		return 0;
 	}
 
