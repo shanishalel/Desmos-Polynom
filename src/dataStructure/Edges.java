@@ -7,7 +7,6 @@ public class Edges implements edge_data {
 	private double WEIGHT;
 	private String INFO;
 	private int TAG;
-	private int countEdge;
 	
 	public Edges (node_data SRC, node_data DEST, double WEIGHT) {
 		this.SRC = SRC;
@@ -48,13 +47,5 @@ public class Edges implements edge_data {
 	@Override
 	public void setTag(int t) {
 		this.TAG=t;
-	}
-	
-	public void setcountEdge(int countEdge) {
-		this.countEdge=countEdge;
-	}
-
-	public int getcountEdge () {
-		return this.countEdge;
 	}
 }

@@ -1,8 +1,12 @@
 package algorithms;
 
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import dataStructure.DGraph;
+import dataStructure.edge_data;
 import dataStructure.graph;
 import dataStructure.node_data;
 /**
@@ -12,18 +16,12 @@ import dataStructure.node_data;
  *
  */
 public class Graph_Algo implements graph_algorithms{
-	private int edgeSize =0;
 	private graph graph ;
-	private int NodeSize =0;
 
-	
-	
+
 	@Override
 	public void init(graph g) {
-		this.edgeSize= g.edgeSize();
-		this.NodeSize=g.nodeSize();
 		this.graph=g;
-		
 	}
 
 	@Override
@@ -40,14 +38,82 @@ public class Graph_Algo implements graph_algorithms{
 	@Override
 	public boolean isConnected() {
 		
+		
+		
+		
 		return false;
 	}
 
 	@Override
 	public double shortestPathDist(int src, int dest) {
-		// TODO Auto-generated method stub
+		setWeight(src);
+		Dijkstras(src);
+//		graph.getNode(src).setTag(1);
+//		Collection <node_data> nodes = this.graph.getV();
+//		for (node_data node_data : nodes) {
+//			Collection <edge_data> Edges = this.graph.getE(dest);
+//			
+//			
+//			this.graph.getE(dest).iterator();
+//			for(edge_data edge_data : Edges) {
+//				double myWieght = node_data.getWeight();
+//				double weight=edge_data.getWeight();
+//				int id = edge_data.getDest();
+//				if (myWieght + weight <  ) {
+//				node_data.setWeight(weight);
+//			}
+			
+			
+		
+		
 		return 0;
 	}
+	
+	private void Dijkstras(int src) {
+		node_data nowNode = graph.getNode(src);
+		node_data current = null;
+		
+		while (nowNode != null ) {
+			nowNode.setTag(1);
+			current=null;
+			Collection <edge_data> Edges = this.graph.getE(nowNode.getKey());
+			for (edge_data edge_data : Edges) {
+				node_data nei_node = graph.getNode(edge_data.getDest());
+				double weight_node = nowNode.getWeight();
+				double weight_nie = nei_node.getWeight();
+				double weight_edge = edge_data.getWeight();
+				
+				if (weight_node + weight_edge < weight_nie  ) {
+					nei_node.setWeight(weight_node + weight_edge);
+					nowNode.setInfo(nei_node.getKey()+"");
+					
+					if(nowNode==null && nei_node.getTag()==0 ) {
+						nowNode=nei_node;
+					}
+				}
+				
+				
+			}
+			
+			
+			
+			
+		}
+		
+	}
+
+	/* This function set the weight, and the tag to 0  */
+	private void setWeight(int src) {
+		//run alll over the hashtable and initialized the weight and the tag to 0
+		Collection <node_data> nodes = this.graph.getV();
+		for (node_data Collection : nodes) {
+			Collection.setWeight(999999999);
+			Collection.setTag(0);
+		}
+		graph.getNode(src).setWeight(0);
+	
+	}
+	
 
 	@Override
 	public List<node_data> shortestPath(int src, int dest) {
@@ -66,8 +132,6 @@ public class Graph_Algo implements graph_algorithms{
 	public graph copy() {
 		// TODO Auto-generated method stub
 		 Graph_Algo ans= new Graph_Algo();
-		 ans.edgeSize=this.edgeSize;
-		 ans.NodeSize=this.NodeSize;
 		 ans.graph=this.graph;
 
 		return ans;

@@ -8,8 +8,8 @@ import java.util.Set;
 
 
 public class DGraph implements graph{
-	private int MC=0;
-	private int countEdge=0;
+	private int MC;
+	private int countEdge;
 	//this hash will represents the node
 	Hashtable<Integer, node_data> Nodes;
 
@@ -17,9 +17,10 @@ public class DGraph implements graph{
 	Hashtable<node_data, Hashtable<Integer, edge_data>>  Edge;
 
 	public DGraph() {
-		Hashtable<Integer, node_data> Nodes = new Hashtable<Integer, node_data>();
-		Hashtable<node_data, Hashtable<Integer, edge_data>>  Edge= new Hashtable<node_data, Hashtable<Integer, edge_data>>();
+		this.Nodes = new Hashtable<Integer, node_data>();
+		this.Edge= new Hashtable<node_data, Hashtable<Integer, edge_data>>();
 		this.MC=0;
+		this.countEdge=0;
 	}
 
 	@Override
@@ -39,17 +40,16 @@ public class DGraph implements graph{
 
 	@Override
 	public void addNode(node_data n) {
-		Nodes ver = (Nodes) n; 
-		Nodes.put(n.getKey(), ver);
+		Nodes.put(n.getKey(), n);
+		Edge.put(n, new Hashtable<Integer, edge_data>());
 		MC++;
 	}
 
 	@Override
 	public void connect(int src, int dest, double w) {
 		edge_data edge = new Edges(Nodes.get(src) , Nodes.get(dest), w);
-		Hashtable<Integer, edge_data> table= new Hashtable<Integer, edge_data>();
-		table.put(dest, edge);
-		Edge.put(Nodes.get(src), table );
+		Edge.get(Nodes.get(src)).put(dest, edge);
+		this.countEdge++;
 		MC++;
 	}
 
@@ -73,8 +73,9 @@ public class DGraph implements graph{
 		Set <node_data> nodes = Edge.keySet();
 		for (node_data node_data : nodes) {
 			Edge.get(node_data).remove(key);
-			//count eadge --
+			this.countEdge--;
 		}
+		this.countEdge -= Edge.get(to_remove).size();
 		Edge.remove(to_remove);
 		MC++;
 		return Nodes.remove(key);
@@ -102,7 +103,7 @@ public class DGraph implements graph{
 
 	@Override
 	public int getMC() {
-		return 0;
+		return MC;
 	}
 
 }

@@ -9,12 +9,12 @@ public class Nodes implements node_data {
 	private String INFO;
 	private int TAG;
 	
-	public Nodes(Integer KEY ,Point3D POINT3D , double WEIGHT) {
+	public Nodes(Integer KEY ,Point3D POINT3D) {
 		this.KEY = KEY;
 		this.POINT3D = POINT3D;
-		this.WEIGHT =WEIGHT;
+		this.WEIGHT =999999999;
 		this.INFO ="";
-		this.TAG = 999999999;
+		this.TAG = 0;
 	}
 
 	@Override

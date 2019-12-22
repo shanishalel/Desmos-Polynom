@@ -25,10 +25,7 @@ class DGraphTest {
 			if(d.getNode(i)!=n) {
 				fail("Not the same node");
 			}
-
 		}
-
-
 	}
 
 	@Test
@@ -197,20 +194,11 @@ class DGraphTest {
 			d.addNode(n);
 		}
 		for(int i =1 ; i <d.nodeSize() ;i++) {
-			d.connect(1, i, i);
-			if(d.getEdge(1, i)!=d.getEdge(1, i)) {
-				fail();
+			if ( d.nodeSize() > 1+i) {
+			d.connect(i, i+1, i);
 			}
-			d.removeEdge(1, i);
-			try {
-				d.getEdge(1, i);
-			}catch(Exception e) {
-				//should throw exception
-				System.out.println("g");
-			}
-			
 		}
-
+		
 	}
 
 	@Test
