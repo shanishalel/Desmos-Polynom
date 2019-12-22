@@ -9,6 +9,7 @@ import java.util.Set;
 
 public class DGraph implements graph{
 	private int MC=0;
+	private int countEdge=0;
 	//this hash will represents the node
 	Hashtable<Integer, node_data> Nodes;
 
@@ -84,8 +85,9 @@ public class DGraph implements graph{
 	public edge_data removeEdge(int src, int dest) {
 		node_data srcNode= Nodes.get(src); //get the node_data of src
 		this.countEdge--;
+		this.MC++;
 		return Edge.get(srcNode).remove(dest); //remove the edge that start from src and ends in dest
-		MC++;
+		
 	}
 
 	@Override
