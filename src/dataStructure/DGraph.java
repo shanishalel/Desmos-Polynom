@@ -12,7 +12,7 @@ public class DGraph implements graph{
 	private int countEdge;
 	//this hash will represents the node
 	Hashtable<Integer, node_data> Nodes;
-
+	
 	/*The hash represent an edges by Hashtable<node_data, Hashtable<Integer, edge_data>>   */
 	Hashtable<node_data, Hashtable<Integer, edge_data>>  Edge;
 
