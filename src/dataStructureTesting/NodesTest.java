@@ -12,7 +12,7 @@ class NodesTest {
 	@Test
 	void testNodes() {
 		Point3D point1=new Point3D(1,2,3);
-		 Nodes node1= new Nodes(1,point1,5 );
+		 Nodes node1= new Nodes(1,point1 );
 		if(node1.getKey()!=1) {
 			fail("Not the same key");	
 		}

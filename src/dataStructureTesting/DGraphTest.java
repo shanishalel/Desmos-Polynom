@@ -20,7 +20,7 @@ class DGraphTest {
 		int j=1;
 		for(int i=1;i<10;i++ ) { //the key can't be 0  
 			Point3D p = new Point3D(j,j,j);
-			Nodes n=new Nodes(i,p,i);
+			Nodes n=new Nodes(i,p);
 			d.addNode(n);
 			if(d.getNode(i)!=n) {
 				fail("Not the same node");
@@ -34,7 +34,7 @@ class DGraphTest {
 		int j=1;
 		for(int i=1;i<10;i++ ) { //the key can't be 0  
 			Point3D p = new Point3D(j,j,j);
-			Nodes n=new Nodes(i,p,i);
+			Nodes n=new Nodes(i,p);
 			d.addNode(n);
 		}
 
@@ -60,7 +60,7 @@ class DGraphTest {
 		int j=1;
 		for (int i =1 ; i<=10000000 ;i++){
 			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p , i);
+			Nodes n = new Nodes(i , p);
 			d.addNode(n);
 		}
 		System.out.println(d.nodeSize());
@@ -72,7 +72,7 @@ class DGraphTest {
 		int j=1;
 		for (int i =1 ; i<=10 ;i++){
 			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p , i);
+			Nodes n = new Nodes(i , p);
 			d.addNode(n);
 		}
 		for(int i =1 ; i <=d.nodeSize() ;i++) {
@@ -95,13 +95,13 @@ class DGraphTest {
 		int j=1;
 		for (int i =1 ; i<=10 ;i++){
 			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p , i);
+			Nodes n = new Nodes(i , p );
 			d.addNode(n);
 		}
 		DGraph g = new DGraph();
 		for (int i =1 ; i<=10 ;i++){
 			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p , i);
+			Nodes n = new Nodes(i , p );
 			g.addNode(n);
 		}
 		//ask is the m and n should be equals
@@ -123,7 +123,7 @@ class DGraphTest {
 		int j=1;
 		for (int i =1 ; i<10 ;i++){
 			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p , i);
+			Nodes n = new Nodes(i , p );
 			d.addNode(n);
 		}
 		for(int i =1 ; i <d.nodeSize() ;i++) {
@@ -132,7 +132,7 @@ class DGraphTest {
 		DGraph g = new DGraph();
 		for (int i =1 ; i<10 ;i++){
 			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p , i);
+			Nodes n = new Nodes(i , p );
 			g.addNode(n);
 		}
 		//connect key 1 to all the edge
@@ -158,7 +158,7 @@ class DGraphTest {
 		int j=1;
 		for (int i =1 ; i<10 ;i++){
 			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p , i);
+			Nodes n = new Nodes(i , p );
 			d.addNode(n);
 		}
 		for(int i =1 ; i <d.nodeSize() ;i++) {
@@ -190,7 +190,7 @@ class DGraphTest {
 		int j=1;
 		for (int i =1 ; i<10 ;i++){
 			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p , i);
+			Nodes n = new Nodes(i , p);
 			d.addNode(n);
 		}
 		for(int i =1 ; i <d.nodeSize() ;i++) {
@@ -207,7 +207,7 @@ class DGraphTest {
 		int j=1;
 		for (int i =1 ; i<10 ;i++){
 			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p , i);
+			Nodes n = new Nodes(i , p );
 			d.addNode(n);
 		}
 		if (d.nodeSize() != 9) {
@@ -221,7 +221,7 @@ class DGraphTest {
 		int j=1;
 		for (int i =1 ; i<10 ;i++){
 			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p , i);
+			Nodes n = new Nodes(i , p);
 			d.addNode(n);
 		}
 		for(int i =1 ; i <d.nodeSize() ;i++) {
