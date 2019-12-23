@@ -36,64 +36,42 @@ public class Graph_Algo implements graph_algorithms{
 
 	}
 
+	//check if the graph is connected
 	@Override
 	public boolean isConnected() {
-		int count =1;
+		int count =0;
+		int key=0;
+		node_data node;
 		Collection <node_data> Nodes = this.graph.getV();
+		Collection <edge_data> Edges;
+		int size=0;
 		for (node_data node_data : Nodes) {
-			int key = node_data.getKey();
-			setWeight(key);
-			if (!firstCanGet2(node_data, count , key)) return false;	
+			 key = node_data.getKey();
+//			setWeight(key);
+			size=+NodeCanGetTo (node_data, size);
+
 		}
+		
 		return false;
 	}
 
-	private boolean firstCanGet2 (node_data node , int count , int key) {
-		Collection <node_data> Nodes = this.graph.getV();
-		Collection <edge_data> Edges = this.graph.getE(node.getKey());
-		node_data node1 = null;
-		if (count == graph.nodeSize() ) {
-			return true;
-		}
-		while(graph.getNode(key) != node   ) {
-		for (edge_data edge_data : Edges) {
-			node1 = graph.getNode(edge_data.getDest());
-			if (node.getTag() == 0) {
-				node1.setTag(1);
-				count++;
-				return firstCanGet2(node1 , count , key);
+
+	
+	
+	/*this function will return the number of nodes she gets to*/
+	private int NodeCanGetTo ( node_data current, int size) {
+		Collection<edge_data> neighbors=graph.getE(current.getKey()); //the neighbors of current  
+		for(edge_data edge:neighbors) {
+			if(edge.getTag()==0) {
+				edge.setTag(1);
+				size++;
+			}else {
+				return 0;
 			}
-			else {
-				return firstCanGet2(node1 , count ,key);
-			}
-		}
+			
 		}
 
-
-		return false;
-	}
-
-	private boolean firstCanGet(node_data node) {
-		int count=1;
-		Collection <node_data> Nodes = this.graph.getV();
-		ArrayList<node_data> nei = new ArrayList<node_data>();
-		Collection <edge_data> Edges = this.graph.getE(node.getKey());
-		for (node_data node_data : Nodes) {
-			for (edge_data edge_data : Edges) {
-				int key=edge_data.getDest();
-				nei.add(graph.getNode(key));
-			}
-			if(node_data.getTag()==0) {
-				node_data.setTag(1);
-				count++;
-				node_data=nei.get(0);
-			}
-			else {
-
-			}
-		}
-
-		return false;
+		return size;
 	}
 
 	@Override
