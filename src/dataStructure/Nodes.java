@@ -16,7 +16,15 @@ public class Nodes implements node_data {
 		this.INFO ="";
 		this.TAG = 0;
 	}
-
+	
+	public Nodes() {
+		this.KEY = null;
+		this.POINT3D = null;
+		this.WEIGHT =0;
+		this.INFO ="";
+		this.TAG = 0;
+		}
+	
 	@Override
 	public int getKey() {
 		return this.KEY;

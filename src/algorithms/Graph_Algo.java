@@ -1,5 +1,10 @@
 package algorithms;
 
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -7,9 +12,11 @@ import java.util.List;
 import java.util.Set;
 
 import dataStructure.DGraph;
+import dataStructure.Nodes;
 import dataStructure.edge_data;
 import dataStructure.graph;
 import dataStructure.node_data;
+import utils.Point3D;
 /**
  * This empty class represents the set of graph-theory algorithms
  * which should be implemented as part of Ex2 - Do edit this class.
@@ -27,48 +34,77 @@ public class Graph_Algo implements graph_algorithms{
 
 	@Override
 	public void init(String file_name) {
-
+		try {
+			FileInputStream file = new FileInputStream(file_name); 
+			ObjectInputStream in = new ObjectInputStream(file); 
+			Graph_Algo graph= (Graph_Algo)in.readObject();
+			in.close();
+			file.close();
+		}
+		catch(IOException ex) {
+			System.out.println("IOException is caught");
+		}
+		catch (ClassNotFoundException e) {
+			System.out.println("ClassNotFoundException is caught"); 		}
 	}
 
 	@Override
 	public void save(String file_name) {
-		// TODO Auto-generated method stub
+		 try
+	        {    
+	            FileOutputStream file = new FileOutputStream(file_name); 
+	            ObjectOutputStream out = new ObjectOutputStream(file); 
+	              
+	            out.writeObject(this.graph); 
+	              
+	            out.close(); 
+	            file.close(); 
+	              
+	        }   
+	        catch(IOException ex) 
+	        { 
+	            System.out.println("IOException is caught"); 
+	        } 
+	  			
 
 	}
 
-	//check if the graph is connected
 	@Override
 	public boolean isConnected() {
 		int count =0;
-		int key=0;
-		node_data node;
 		Collection <node_data> Nodes = this.graph.getV();
-		Collection <edge_data> Edges;
 		int size=0;
 		for (node_data node_data : Nodes) {
-			 key = node_data.getKey();
-//			setWeight(key);
-			size=+NodeCanGetTo (node_data, size);
+			setWeight(node_data.getKey());
+			size=0;
+			for (node_data node_data2 : Nodes) {
+				size=+NodeCanGetTo (node_data2, size);
+				if(size==Nodes.size()) {
+					count++;
+				}
+			}
+
 
 		}
-		
+		if(count==Nodes.size()) {
+			return true;
+		}
+
 		return false;
 	}
 
 
-	
-	
+
 	/*this function will return the number of nodes she gets to*/
 	private int NodeCanGetTo ( node_data current, int size) {
 		Collection<edge_data> neighbors=graph.getE(current.getKey()); //the neighbors of current  
 		for(edge_data edge:neighbors) {
-			if(edge.getTag()==0) {
-				edge.setTag(1);
+			if(graph.getNode(edge.getSrc()).getTag()==0) {
+				graph.getNode(edge.getSrc()).setTag(1);
 				size++;
 			}else {
-				return 0;
+				return size;
 			}
-			
 		}
 
 		return size;
@@ -171,14 +207,28 @@ public class Graph_Algo implements graph_algorithms{
 		return null;
 	}
 
-	//not finish
 	@Override
 	public graph copy() {
-		// TODO Auto-generated method stub
-		Graph_Algo ans= new Graph_Algo();
-		ans.graph=this.graph;
+		DGraph copy_Dgraph=new DGraph();
+		Collection <node_data> Nodes = this.graph.getV();
+		for(node_data node_data:Nodes) {
+			//copy the node
+			Nodes copy_node= new Nodes(node_data.getKey(),node_data.getLocation());
+			copy_node.setInfo(node_data.getInfo());
+			copy_node.setTag(node_data.getTag());
+			copy_node.setWeight(node_data.getWeight());
+			copy_Dgraph.addNode(copy_node);
+			Collection<edge_data> Edges = this.graph.getE(node_data.getKey());
+			for(edge_data edge_data: Edges ) {
+				copy_Dgraph.connect(edge_data.getSrc(), edge_data.getDest(), edge_data.getWeight());
 
-		return null;
+			}
+
+		}
+		Graph_Algo copy = new Graph_Algo();
+		copy.init(copy_Dgraph);
+		return copy.graph;
+
 	}
 
 }
