@@ -16,7 +16,7 @@ import dataStructure.graph;
 import dataStructure.node_data;
 import utils.Point3D;
 
-class Graph_AlgoTest {
+class Graph_AlgoTest implements java.io.Serializable {
 
 	@Test
 	void testInitGraph() {
@@ -33,12 +33,28 @@ class Graph_AlgoTest {
 		//1->2, 1->3, 1->4, 1->5, 1->6, 1->7, 1->8, 1->9
 		Graph_Algo graph = new Graph_Algo();
 		graph.init(d);
+		
 	}
 
 	@Test
 	void testInitString() {
+		DGraph d = new DGraph();
+		int j=1;
+		for (int i =1 ; i<10 ;i++){
+			Point3D p = new Point3D(j, j, j);
+			Nodes n = new Nodes(i , p);
+			d.addNode(n);
+		}
+		for(int i =1 ; i <d.nodeSize() ;i++) {
+			d.connect(1, i, i);
+		}
+		//1->2, 1->3, 1->4, 1->5, 1->6, 1->7, 1->8, 1->9
 		Graph_Algo graph = new Graph_Algo();
-		graph.init("test_save.txt");
+		graph.init(d);
+		graph.save("test_save1.txt");
+		Graph_Algo graph1 = new Graph_Algo();
+		graph1.init("test_save1.txt");
+		
 		
 	}
 

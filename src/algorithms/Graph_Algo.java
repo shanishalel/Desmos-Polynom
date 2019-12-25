@@ -5,6 +5,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -23,7 +24,7 @@ import utils.Point3D;
  * @author 
  *
  */
-public class Graph_Algo implements graph_algorithms{
+public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 	private graph graph ;
 
 
@@ -34,38 +35,40 @@ public class Graph_Algo implements graph_algorithms{
 
 	@Override
 	public void init(String file_name) {
+		Graph_Algo save=new Graph_Algo();
 		try {
 			FileInputStream file = new FileInputStream(file_name); 
 			ObjectInputStream in = new ObjectInputStream(file); 
-			Graph_Algo graph= (Graph_Algo)in.readObject();
+			save =(Graph_Algo) in.readObject();
+			this.init(save.graph);
 			in.close();
 			file.close();
 		}
-		catch(IOException ex) {
+		catch(Exception ex) {
 			System.out.println("IOException is caught");
 		}
-		catch (ClassNotFoundException e) {
-			System.out.println("ClassNotFoundException is caught"); 		}
 	}
 
 	@Override
 	public void save(String file_name) {
-		 try
-	        {    
-	            FileOutputStream file = new FileOutputStream(file_name); 
-	            ObjectOutputStream out = new ObjectOutputStream(file); 
-	              
-	            out.writeObject(this.graph); 
-	              
-	            out.close(); 
-	            file.close(); 
-	              
-	        }   
-	        catch(IOException ex) 
-	        { 
-	            System.out.println("IOException is caught"); 
-	        } 
-	  			
+		try
+		{    
+			FileOutputStream file = new FileOutputStream(file_name); 
+			ObjectOutputStream out = new ObjectOutputStream(file); 
+
+			out.writeObject(this.graph); 
+
+			out.close(); 
+			file.close(); 
+			
+
+		}   
+		catch(IOException ex) 
+		{ 
+			
+			System.out.println("IOException is caught"); 
+		} 
+
 
 	}
 
@@ -95,7 +98,7 @@ public class Graph_Algo implements graph_algorithms{
 
 
 
-	/*this function will return the number of nodes she gets to*/
+	/*this function will return the number of nodes she can gets to*/
 	private int NodeCanGetTo ( node_data current, int size) {
 		Collection<edge_data> neighbors=graph.getE(current.getKey()); //the neighbors of current  
 		for(edge_data edge:neighbors) {

@@ -7,7 +7,7 @@ import java.util.Hashtable;
 import java.util.Set;
 
 
-public class DGraph implements graph{
+public class DGraph implements graph, java.io.Serializable{
 	private int MC;
 	private int countEdge;
 	//this hash will represents the node

@@ -1,6 +1,6 @@
 package dataStructure;
 
-public class Edges implements edge_data {
+public class Edges implements edge_data, java.io.Serializable {
 	
 	private node_data SRC;
 	private node_data DEST;
