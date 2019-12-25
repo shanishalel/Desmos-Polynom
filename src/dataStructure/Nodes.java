@@ -3,6 +3,10 @@ package dataStructure;
 import utils.Point3D;
 
 public class Nodes implements node_data , java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -3552316394223526386L;
 	private Integer KEY;
 	private Point3D POINT3D;
 	private double WEIGHT;

@@ -17,6 +17,10 @@ import utils.Point3D;
 
 public class Gui_Graph extends JFrame implements ActionListener, MouseListener
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 6128157318970002904L;
 	LinkedList<Point3D> points = new LinkedList<Point3D>();
 
 	public static void main(String[] args) 
@@ -126,11 +130,6 @@ public class Gui_Graph extends JFrame implements ActionListener, MouseListener
 		
 	}
 
-	@Override
-	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
 
 
 	

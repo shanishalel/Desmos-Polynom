@@ -8,6 +8,10 @@ import java.util.Set;
 
 
 public class DGraph implements graph, java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 7216877636591903122L;
 	private int MC;
 	private int countEdge;
 	//this hash will represents the node

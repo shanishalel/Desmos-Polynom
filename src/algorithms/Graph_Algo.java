@@ -25,6 +25,10 @@ import utils.Point3D;
  *
  */
 public class Graph_Algo implements graph_algorithms, java.io.Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = -6724965554869338604L;
 	private graph graph ;
 
 
@@ -40,13 +44,12 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 			FileInputStream file = new FileInputStream(file_name); 
 			ObjectInputStream in = new ObjectInputStream(file); 
 			save =(Graph_Algo) in.readObject();
-			this.init(save.graph);
+			this.graph = save.graph;
 			in.close();
 			file.close();
 		}
 		catch(Exception ex) {
-			System.out.println("IOException is caught");
-		}
+			ex.printStackTrace();		}
 	}
 
 	@Override
@@ -56,7 +59,7 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 			FileOutputStream file = new FileOutputStream(file_name); 
 			ObjectOutputStream out = new ObjectOutputStream(file); 
 
-			out.writeObject(this.graph); 
+			out.writeObject(this); 
 
 			out.close(); 
 			file.close(); 
