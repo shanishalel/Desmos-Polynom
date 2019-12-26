@@ -13,20 +13,22 @@ import java.util.LinkedList;
 
 import javax.swing.JFrame;
 
+import algorithms.Graph_Algo;
+import dataStructure.graph;
 import utils.Point3D;
 
 public class Gui_Graph extends JFrame implements ActionListener, MouseListener
 {
+	private graph graph;
 	/**
 	 * 
 	 */
+	
 	private static final long serialVersionUID = 6128157318970002904L;
 	LinkedList<Point3D> points = new LinkedList<Point3D>();
-
-	public static void main(String[] args) 
-	{
-		Gui_Graph window = new Gui_Graph();
-		window.setVisible(true);
+	
+	public void init(graph g) {
+		this.graph=g;
 	}
 	
 	public Gui_Graph()
@@ -38,20 +40,36 @@ public class Gui_Graph extends JFrame implements ActionListener, MouseListener
 	{
 		this.setSize(500, 500);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
+		// menu up
 		MenuBar menuBar = new MenuBar();
 		Menu menu = new Menu("Menu");
 		menuBar.add(menu);
+		Menu graph_paint = new Menu("Graph commands");
+		menuBar.add(graph_paint);
 		this.setMenuBar(menuBar);
 		
-		MenuItem item1 = new MenuItem("Item 1");
-		item1.addActionListener(this);
+		MenuItem save = new MenuItem("Save graph");
+		save.addActionListener(this);
 		
-		MenuItem item2 = new MenuItem("Item 2");
-		item2.addActionListener(this);
+		MenuItem load = new MenuItem("Load graph");
+		load.addActionListener(this);
 		
-		menu.add(item1);
-		menu.add(item2);
+		menu.add(save);
+		menu.add(load);
+		
+		// graph up
+		MenuItem isConnected = new MenuItem("is Connected");
+		isConnected.addActionListener(this);
+		
+		MenuItem shortestPathDist = new MenuItem("shortest Path Dist");
+		shortestPathDist.addActionListener(this);
+		
+		MenuItem shortestPath = new MenuItem("shortest Path");
+		shortestPath.addActionListener(this);
+		
+		graph_paint.add(isConnected);
+		graph_paint.add(shortestPathDist);
+		graph_paint.add(shortestPath);
 		
 		this.addMouseListener(this);
 	}
@@ -64,12 +82,12 @@ public class Gui_Graph extends JFrame implements ActionListener, MouseListener
 		
 		for (Point3D p : points) 
 		{
-			g.setColor(Color.BLUE);
+			g.setColor(Color.ORANGE);
 			g.fillOval((int)p.x(), (int)p.y(), 10, 10);
 			
 			if(prev != null)
 			{
-				g.setColor(Color.RED);
+				g.setColor(Color.BLUE);
 				g.drawLine((int)p.x(), (int)p.y(), 
 						(int)prev.x(), (int)prev.y());
 				
@@ -85,7 +103,7 @@ public class Gui_Graph extends JFrame implements ActionListener, MouseListener
 	{
 		String str = e.getActionCommand();
 		
-		if(str.equals("Item 1"))
+		if(str.equals("Save graph"))
 		{
 			Point3D p1 = new Point3D(100,100);
 			Point3D p2 = new Point3D(50,300);
@@ -108,8 +126,21 @@ public class Gui_Graph extends JFrame implements ActionListener, MouseListener
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
 		
+		
+		
+//		JFileChooser fileChooser = new JFileChooser();
+//		if (fileChooser.showOpenDialog(modalToComponent) == JFileChooser.APPROVE_OPTION) {
+//		  File file = fileChooser.getSelectedFile();
+//		   load from file
+//		}
+		
+//		int x = e.getX();
+//		int y = e.getY();
+//		Point3D p = new Point3D(x,y);
+//		points.add(p);
+//		repaint();
+//		System.out.println("mousePressed");		
 	}
 
 	@Override
