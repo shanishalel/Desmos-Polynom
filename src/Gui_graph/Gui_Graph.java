@@ -9,37 +9,43 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.util.Collection;
 import java.util.LinkedList;
 
 import javax.swing.JFrame;
 
 import algorithms.Graph_Algo;
+import dataStructure.edge_data;
 import dataStructure.graph;
+import dataStructure.node_data;
 import utils.Point3D;
 
-public class Gui_Graph extends JFrame implements ActionListener, MouseListener
+public class Gui_Graph extends JFrame implements ActionListener
 {
-	private graph graph;
+
 	/**
 	 * 
 	 */
-	
+	private graph graph;
 	private static final long serialVersionUID = 6128157318970002904L;
 	LinkedList<Point3D> points = new LinkedList<Point3D>();
-	
-	public void init(graph g) {
-		this.graph=g;
-	}
-	
-	public Gui_Graph()
-	{
+
+	public Gui_Graph(){
+		this.graph =null;
 		initGUI();
 	}
-	
+
+	public Gui_Graph(graph g)
+	{
+		this.graph=g;
+		initGUI();
+	}
+
 	private void initGUI() 
 	{
-		this.setSize(500, 500);
+		this.setSize(1000, 10000);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setVisible(true);
 		// menu up
 		MenuBar menuBar = new MenuBar();
 		Menu menu = new Menu("Menu");
@@ -47,123 +53,92 @@ public class Gui_Graph extends JFrame implements ActionListener, MouseListener
 		Menu graph_paint = new Menu("Graph commands");
 		menuBar.add(graph_paint);
 		this.setMenuBar(menuBar);
-		
+
 		MenuItem save = new MenuItem("Save graph");
 		save.addActionListener(this);
-		
+
 		MenuItem load = new MenuItem("Load graph");
 		load.addActionListener(this);
-		
+
 		menu.add(save);
 		menu.add(load);
-		
+
 		// graph up
-		MenuItem isConnected = new MenuItem("is Connected");
-		isConnected.addActionListener(this);
-		
+		MenuItem Drawgraph = new MenuItem("Draw graph");
+		Drawgraph.addActionListener(this);
 		MenuItem shortestPathDist = new MenuItem("shortest Path Dist");
 		shortestPathDist.addActionListener(this);
-		
 		MenuItem shortestPath = new MenuItem("shortest Path");
 		shortestPath.addActionListener(this);
-		
-		graph_paint.add(isConnected);
+		graph_paint.add(Drawgraph);
 		graph_paint.add(shortestPathDist);
 		graph_paint.add(shortestPath);
-		
-		this.addMouseListener(this);
 	}
-	
+
 	public void paint(Graphics g)
 	{
 		super.paint(g);
-		
-		Point3D prev = null;
-		
-		for (Point3D p : points) 
-		{
-			g.setColor(Color.ORANGE);
-			g.fillOval((int)p.x(), (int)p.y(), 10, 10);
-			
-			if(prev != null)
-			{
-				g.setColor(Color.BLUE);
-				g.drawLine((int)p.x(), (int)p.y(), 
-						(int)prev.x(), (int)prev.y());
-				
-				g.drawString("5", (int)((p.x()+prev.x())/2),(int)((p.y()+prev.y())/2));
+
+
+		if(this.graph != null) {
+			Collection <node_data> Nodes = this.graph.getV();
+			for (node_data node_data : Nodes) {
+				Point3D p = node_data.getLocation();
+				g.setColor(Color.ORANGE);
+				g.fillOval(p.ix(), p.iy(), 10, 10);
+				g.drawString(Integer.toString(node_data.getKey()), p.ix(), p.iy()-1);
+				Collection<edge_data> Edge = this.graph.getE(node_data.getKey());
+				for (edge_data edge_data : Edge) {
+					node_data dest = graph.getNode(edge_data.getDest());
+					Point3D p2 = dest.getLocation();
+					g.setColor(Color.BLUE);
+					g.drawLine(p.ix(), p.iy(),
+							p2.ix(), p2.iy());
+					g.drawString(Double.toString(edge_data.getWeight()),(p.ix()+p2.ix())/2 , (p.iy()+p2.iy())/2);
+					g.setColor(Color.GREEN);
+					g.fillOval(p2.ix()-3, p2.iy()-3, 5, 5);
+				}
 			}
-			
-			prev = p;
 		}
 	}
+
+	private void Savegraph() {
+		
+	}
 	
+	private void Loadgraph() {
+		
+	}
+	
+	private void shortestPathDist() {
+		
+	}
+	
+	private void shortestPath() {
+		
+	}
+	
+
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		String str = e.getActionCommand();
-		
-		if(str.equals("Save graph"))
-		{
-			Point3D p1 = new Point3D(100,100);
-			Point3D p2 = new Point3D(50,300);
-			Point3D p3 = new Point3D(400,150);
-			
-			points.add(p1);
-			points.add(p2);
-			points.add(p3);
-			
-			repaint();
+
+		switch(str) {
+		case "Draw graph" : repaint();
+		break;
+		case "Save graph": Savegraph();
+		break;
+		case "Load graph": Loadgraph();
+		break;
+		case "shortest Path Dist": shortestPathDist();
+		break;
+		case "shortest Path": shortestPath();
+		break;
+		default:
+			break;
+
 		}
-		
-	}
-	
-	@Override
-	public void mouseClicked(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
 	}
 
-	@Override
-	public void mousePressed(MouseEvent e) {
-		
-		
-		
-//		JFileChooser fileChooser = new JFileChooser();
-//		if (fileChooser.showOpenDialog(modalToComponent) == JFileChooser.APPROVE_OPTION) {
-//		  File file = fileChooser.getSelectedFile();
-//		   load from file
-//		}
-		
-//		int x = e.getX();
-//		int y = e.getY();
-//		Point3D p = new Point3D(x,y);
-//		points.add(p);
-//		repaint();
-//		System.out.println("mousePressed");		
-	}
-
-	@Override
-	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
-		
-	}
-
-
-
-	
-	
-	
 }
