@@ -228,6 +228,7 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
  * and we will use a function to check if we pass one of the nodes that we gets from the user .*/
 	@Override
 	public List<node_data> TSP(List<Integer> targets) {
+	List <Integer> KeyTSP= new ArrayList <Integer>(); 
 	List <node_data> pathTSP= new ArrayList <node_data>(); 
 	if(targets.size()==0) {
 		return pathTSP;
@@ -237,23 +238,19 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		return pathTSP;
 	}
 	for(Integer integer: targets) {
-		pathTSP.add(this.graph.getNode(integer));
+		KeyTSP.add(integer);
 	}
 	int start=0;
 	int start1=1;
 	while(!targets.isEmpty()) {
-		if(pathTSP.contains(targets.get(start)) && (pathTSP.contains(targets.get(start1)))) {
-			pathTSP =Path( start, start1, pathTSP);
+		if(KeyTSP.contains(targets.get(start)) && (KeyTSP.contains(targets.get(start1)))) {
+			pathTSP =Path( targets.get(start), targets.get(start1), pathTSP);
 		}
 		start++;
 		start1++;
 	}
 	return pathTSP;
 
-
-		
-		
-		return null;
 	}
 
 	/**

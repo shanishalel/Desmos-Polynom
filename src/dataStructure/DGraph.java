@@ -28,11 +28,8 @@ public class DGraph implements graph, java.io.Serializable{
 	}
 
 	@Override
-	public node_data getNode(int key) {
-		if (key != 0) {
-			return Nodes.get(key);
-		}
-		return null;
+	public node_data getNode(int key) {		
+		return Nodes.get(key);
 	}
 
 	@Override

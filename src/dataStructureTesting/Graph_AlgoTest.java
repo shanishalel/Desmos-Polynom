@@ -4,6 +4,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 import org.junit.jupiter.api.Test;
@@ -193,7 +194,26 @@ class Graph_AlgoTest implements java.io.Serializable {
 
 	@Test
 	void testTSP() {
-		fail("Not yet implemented");
+		DGraph d = new DGraph();
+		List <Integer> targets = new ArrayList();
+		int j=1;
+		for (int i =1 ; i<=6 ;i++){
+			Point3D p = new Point3D(j, j, j);
+			Nodes n = new Nodes(i , p);
+			targets.add(n.getKey());
+			d.addNode(n);
+			}
+		d.connect(1, 2, 3);
+		d.connect(1, 3, 1);
+		d.connect(2, 3, 7);
+		d.connect(3, 4, 2);
+		d.connect(2, 4, 5);
+		d.connect(2, 6, 1);
+		d.connect(4, 6 ,7);
+		Graph_Algo graph = new Graph_Algo();
+		graph.init(d);
+		graph.TSP(targets);
+	
 	}
 
 	@Test
