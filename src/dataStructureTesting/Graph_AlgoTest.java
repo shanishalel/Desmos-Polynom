@@ -192,6 +192,7 @@ class Graph_AlgoTest implements java.io.Serializable {
 		System.out.println(graph.shortestPath(1, 6));
 	}
 
+	//should be : 1,2,3,4,5
 	@Test
 	void testTSP() {
 		DGraph d = new DGraph();
@@ -213,6 +214,7 @@ class Graph_AlgoTest implements java.io.Serializable {
 		Graph_Algo graph = new Graph_Algo();
 		graph.init(d);
 		graph.TSP(targets);
+		
 	
 	}
 

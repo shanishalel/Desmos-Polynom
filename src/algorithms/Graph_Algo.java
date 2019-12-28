@@ -63,12 +63,12 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 
 			out.close(); 
 			file.close(); 
-			
+
 
 		}   
 		catch(IOException ex) 
 		{ 
-			
+
 			System.out.println("IOException is caught"); 
 		} 
 
@@ -123,13 +123,13 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		return graph.getNode(dest).getWeight();
 	}
 
-	
+
 	/**
 	 * This Function is finding the shorts path in the graph by check what path is cost less
 	 * and choose her every junction, she will change the weight for every Node she will get to .
 	 * @param src
 	 */
-	
+
 	private void Dijkstras(int src) {
 		node_data nowNode = graph.getNode(src);
 		ArrayList<node_data> currentmin = new ArrayList<node_data>();
@@ -159,12 +159,12 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		}
 
 	}
-/**
- * This function is made a search insert so we will know were we should put the Node
- * @param arr
- * @param target
- * @return
- */
+	/**
+	 * This function is made a search insert so we will know were we should put the Node
+	 * @param arr
+	 * @param target
+	 * @return
+	 */
 	private static int searchInsert(ArrayList<node_data> arr, double target) {
 		int hight = arr.size()-1;
 		int low =0;
@@ -188,7 +188,7 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		}
 		return mid;
 	}
-	
+
 	/**
 	 * This function set the weight, and the tag to 0
 	 * @param src
@@ -222,34 +222,63 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		}
 		return shortPath;
 	}
-	
-	
-/*we will create a function that start by calculate the shortes path between the first target
- * and we will use a function to check if we pass one of the nodes that we gets from the user .*/
+
+
+	/*we will create a function that start by calculate the shortes path between the first target
+	 * and we will use a function to check if we pass one of the nodes that we gets from the user .*/
 	@Override
 	public List<node_data> TSP(List<Integer> targets) {
-	List <Integer> KeyTSP= new ArrayList <Integer>(); 
-	List <node_data> pathTSP= new ArrayList <node_data>(); 
-	if(targets.size()==0) {
-		return pathTSP;
-	}
-	if(targets.size()==1) {
-		pathTSP.add(this.graph.getNode(targets.get(0)));
-		return pathTSP;
-	}
-	for(Integer integer: targets) {
-		KeyTSP.add(integer);
-	}
-	int start=0;
-	int start1=1;
-	while(!targets.isEmpty()) {
-		if(KeyTSP.contains(targets.get(start)) && (KeyTSP.contains(targets.get(start1)))) {
-			pathTSP =Path( targets.get(start), targets.get(start1), pathTSP);
+		List <Integer> KeyTSP= new ArrayList <Integer>(); 
+		List <node_data> pathTSP= new ArrayList <node_data>(); 
+		List <node_data> pathTSPTemp= new ArrayList <node_data>(); 
+
+		if(targets.size()==0) {
+			return pathTSP;
 		}
-		start++;
-		start1++;
-	}
-	return pathTSP;
+		if(targets.size()==1) {
+			pathTSP.add(this.graph.getNode(targets.get(0)));
+			return pathTSP;
+		}
+		for(Integer integer: targets) {
+			KeyTSP.add(integer);
+		}
+		int start=0;
+		int start1=1;
+		boolean theFirst=true;
+		while(start1<targets.size()) {
+			if(KeyTSP.contains(targets.get(start))) {
+				if (KeyTSP.contains(targets.get(start1))){
+					if(theFirst) {
+						pathTSPTemp =Path( targets.get(start), targets.get(start1), KeyTSP);
+						theFirst=false;
+						int i=0;
+						while(i<pathTSPTemp.size()) { //adding all the path to the path of ans
+							pathTSP.add(pathTSPTemp.get(i)); 
+							i++;
+						}
+					}
+					else {
+						List<node_data>temp=Path( targets.get(start), targets.get(start1), KeyTSP);
+						//temp.remove(0);//cause we enteret him
+						int i=0;
+						while(i<temp.size()) {
+							pathTSP.add(temp.get(i)); 
+							i++;
+						}
+					}
+				
+			start++;
+			start1++;
+			}
+				else {
+					start1++;
+				}
+			}
+			else {
+				start++;
+			}
+		}
+		return pathTSP;
 
 	}
 
@@ -258,23 +287,23 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 	 * , she will check if she pass the other targets in her way 
 	 *
 	 */
-	
-	private List <node_data> Path(int src, int dest,List <node_data> target) {
-		List <node_data> path= new ArrayList();
+
+	private List <node_data> Path(int src, int dest,List <Integer> target) {
+		List <node_data> path= new ArrayList<node_data>();
 		Dijkstras(src);
 		//we will check for every path if we pass one of the nodes in the shorts path we find 
-		node_data currentNode= this.graph.getNode(src); 
-		while(currentNode.getKey()!=dest) {//we didn't finishied run all over the path
+		node_data currentNode= this.graph.getNode(dest); 
+		while(!currentNode.getInfo().isEmpty()) {//we didn't finishied run all over the path
 			path.add(currentNode);
-			
-			if((currentNode.getTag()==1) && (target.contains(currentNode))==true) {
-				path.remove(currentNode);
+			currentNode=this.graph.getNode(Integer.parseInt(currentNode.getInfo()));
+			if( target.contains(currentNode.getKey())) {
+				path.remove(currentNode.getKey());
 			}
 		}
 		path.add(currentNode); //adding the first node
 		return path;
 	}
-	
+
 	@Override
 	public graph copy() {
 		DGraph copy_Dgraph=new DGraph();
