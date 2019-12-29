@@ -53,8 +53,8 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 			ex.printStackTrace();		}
 	}
 
-	
-	 
+
+
 	@Override
 	public void save(String file_name) {
 		try
@@ -209,19 +209,24 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 
 	@Override
 	public List<node_data> shortestPath(int src, int dest) {
-		ArrayList<node_data> shortPath = new ArrayList<node_data>();
-		setWeight(src);
-		Dijkstras(src);
-		String info = graph.getNode(dest).getInfo();
-		int key = Integer.parseInt(info);
-		shortPath.add(0,graph.getNode(dest));
-		shortPath.add(0,graph.getNode(key));
-		while (!shortPath.contains(graph.getNode(src))) {	
-			info = graph.getNode(key).getInfo();
-			key = Integer.parseInt(info);
-			shortPath.add(0,graph.getNode(key));
+		if(!connected(src,dest)) {
+			throw new RuntimeException(" The edges that you entered aren't connected ");
 		}
-		return shortPath;
+		else {
+			ArrayList<node_data> shortPath = new ArrayList<node_data>();
+			setWeight(src);
+			Dijkstras(src);
+			String info = graph.getNode(dest).getInfo();
+			int key = Integer.parseInt(info);
+			shortPath.add(0,graph.getNode(dest));
+			shortPath.add(0,graph.getNode(key));
+			while (!shortPath.contains(graph.getNode(src))) {	
+				info = graph.getNode(key).getInfo();
+				key = Integer.parseInt(info);
+				shortPath.add(0,graph.getNode(key));
+			}
+			return shortPath;
+		}
 	}
 
 
@@ -267,10 +272,10 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 							i++;
 						}
 					}
-				
-			start++;
-			start1++;
-			}
+
+					start++;
+					start1++;
+				}
 				else {
 					start1++;
 				}
@@ -282,6 +287,24 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		return pathTSP;
 
 	}
+
+	/**
+	 * this function check if the node that we entered there src and dest are connected
+	 * if they aren't connect we return false
+	 * @param src
+	 * @param dest
+	 * @return
+	 */
+	public boolean connected(int src, int dest) {
+		double shortestPathDist=shortestPathDist (src, dest);
+		if(shortestPathDist==9.99999999E8) {
+			return false;
+		}
+		return true;
+	}
+
+
+
 
 	/**
 	 * This function will calculate the path for the user with the targest she will gets 

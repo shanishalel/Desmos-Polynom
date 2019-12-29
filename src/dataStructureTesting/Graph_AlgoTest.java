@@ -168,7 +168,7 @@ class Graph_AlgoTest implements java.io.Serializable {
 		d.connect(4, 6 ,7);
 		Graph_Algo graph = new Graph_Algo();
 		graph.init(d);
-		System.out.println(graph.shortestPathDist(1, 6));
+		System.out.println(graph.shortestPath(1, 6));
 	}
 
 	@Test
@@ -189,7 +189,13 @@ class Graph_AlgoTest implements java.io.Serializable {
 		d.connect(4, 6 ,7);
 		Graph_Algo graph = new Graph_Algo();
 		graph.init(d);
-		System.out.println(graph.shortestPath(1, 6));
+		try {
+			System.out.println(graph.shortestPath(1, 6));
+		}
+		catch(Exception e) {
+			System.out.println("good");
+		}
+		
 	}
 
 	//should be : 1,2,3,4,5
@@ -204,7 +210,7 @@ class Graph_AlgoTest implements java.io.Serializable {
 			targets.add(n.getKey());
 			d.addNode(n);
 			}
-		d.connect(1, 2, 3);
+		
 		d.connect(1, 3, 1);
 		d.connect(2, 3, 7);
 		d.connect(3, 4, 2);
@@ -213,8 +219,13 @@ class Graph_AlgoTest implements java.io.Serializable {
 		d.connect(4, 6 ,7);
 		Graph_Algo graph = new Graph_Algo();
 		graph.init(d);
+		System.out.println("the shorts path"+graph.shortestPathDist(1,2));
+		try {
 		graph.TSP(targets);
-		
+		}
+		catch(Exception e) {
+			System.out.println("good");
+		}
 	
 	}
 
