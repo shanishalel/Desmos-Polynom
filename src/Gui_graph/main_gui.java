@@ -15,8 +15,27 @@ public class main_gui {
 
 	public static void main(String[] args) {
 //		testmaybe();
-//			test();
+			test();
 			test2();
+//			test3();
+	}
+
+	private static void test3() {
+		DGraph d = new DGraph();
+		for (int i = 0 ; i< 1000000 ; i++) {
+			int x = (int) ((Math.random()*700)+100);
+			int y = (int) ((Math.random()*700)+100);
+			d.addNode(new Nodes(i, new Point3D(x, y)));
+		}
+		for (int i =0 ; i <10000 ; i++) {
+			int w = (int) ((Math.random()*20)+1);
+			int src =(int) ((Math.random()*100));
+			int dest =(int) ((Math.random()*100));
+			d.connect(src,dest , w);
+		}
+		
+		Gui_Graph graph = new Gui_Graph(d);
+		
 	}
 
 	private static void test2() {

@@ -20,6 +20,7 @@ import java.util.List;
 import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -149,21 +150,49 @@ public class Gui_Graph extends JFrame implements ActionListener
 	}
 	
 	private void shortestPathDist() {
-//		Graph_Algo gg = new Graph_Algo();
-//		gg.init(this.graph);
-//		double ans = gg.shortestPathDist(1, 6);
-//		String s = Double.toString(ans);
-//		 
-		 
-		 
-	}
+		JFrame input = new JFrame();
+		String src = JOptionPane.showInputDialog(
+                null, "what is the key for src?");
+		String dest = JOptionPane.showInputDialog(
+                null, "what is the key for dest?");
+		try {
+		Graph_Algo gg = new Graph_Algo();
+		gg.init(this.graph);
+		double ans = gg.shortestPathDist(Integer.parseInt(src), Integer.parseInt(dest));
+		String s = Double.toString(ans);	
+		JOptionPane.showMessageDialog(input, "the shortest distance is: " + s);
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+		}
 	
 	private void shortestPath() {
-//		Graph_Algo gg = new Graph_Algo();
-//		gg.init(this.graph);
-//		ArrayList<node_data> shortPath = new ArrayList<node_data>();
-//		shortPath = (ArrayList<node_data>) gg.shortestPath(1, 6);
+		String src = JOptionPane.showInputDialog(
+                null, "what is the key for src?");
+		String dest = JOptionPane.showInputDialog(
+                null, "what is the key for dest?");
+		try {
+		Graph_Algo gg = new Graph_Algo();
+		gg.init(this.graph);
+		ArrayList<node_data> shortPath = new ArrayList<node_data>();
+		shortPath = (ArrayList<node_data>) gg.shortestPath(Integer.parseInt(src), Integer.parseInt(dest));
+		DGraph gra = new DGraph();
+		for (int i =0 ; i < shortPath.size() ; i++) {
+			gra.addNode(shortPath.get(i));
+		}
+		int j=0;
+		while ( j < shortPath.size()-1) {
+			gra.connect(shortPath.get(j).getKey(), shortPath.get(j+1).getKey(), (shortPath.get(j+1).getWeight()-shortPath.get(j).getWeight()) );
+		j++;
+		}
+		this.graph=gra;
+		repaint();
 		
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	
