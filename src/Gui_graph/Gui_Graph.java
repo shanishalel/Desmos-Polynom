@@ -136,13 +136,14 @@ public class Gui_Graph extends JFrame implements ActionListener
 		Graph_Algo gg = new Graph_Algo();
 		JFrame parentFrame = new JFrame();
 		JFileChooser fileChooser = new JFileChooser();
-		fileChooser.setDialogTitle("Specify a file to save");   
+		fileChooser.setDialogTitle("Specify a file to load");   
 		int userSelection = fileChooser.showOpenDialog(parentFrame);
 	
 		if (userSelection == JFileChooser.APPROVE_OPTION) {
 		    File fileToLoad = fileChooser.getSelectedFile();
 		    String file= fileToLoad.getAbsolutePath();
 			gg.init(file);
+			repaint();
 		    System.out.println("Load from file: " + fileToLoad.getAbsolutePath());
 		}
 	}

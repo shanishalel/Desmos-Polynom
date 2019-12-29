@@ -40,6 +40,7 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 	@Override
 	public void init(String file_name) {
 		Graph_Algo save=new Graph_Algo();
+		save=null;
 		try {
 			FileInputStream file = new FileInputStream(file_name); 
 			ObjectInputStream in = new ObjectInputStream(file); 
@@ -52,15 +53,15 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 			ex.printStackTrace();		}
 	}
 
+	
+	 
 	@Override
 	public void save(String file_name) {
 		try
 		{    
-			FileOutputStream file = new FileOutputStream(file_name); 
+			FileOutputStream file = new FileOutputStream(file_name);
 			ObjectOutputStream out = new ObjectOutputStream(file); 
-
 			out.writeObject(this); 
-
 			out.close(); 
 			file.close(); 
 
