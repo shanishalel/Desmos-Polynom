@@ -265,30 +265,6 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		return Path;
 	}
 
-
-
-	/**
-	 * This function will calculate the path for the user with the targest she will gets 
-	 * , she will check if she pass the other targets in her way 
-	 *
-	 */
-
-	private List <node_data> Path(int src, int dest,List <Integer> target) {
-		List <node_data> path= new ArrayList<node_data>();
-		Dijkstras(src);
-		//we will check for every path if we pass one of the nodes in the shorts path we find 
-		node_data currentNode= this.graph.getNode(dest); 
-		while(!currentNode.getInfo().isEmpty()) {//we didn't finishied run all over the path
-			path.add(currentNode);
-			currentNode=this.graph.getNode(Integer.parseInt(currentNode.getInfo()));
-			if( target.contains(currentNode.getKey())) {
-				path.remove(currentNode.getKey());
-			}
-		}
-		path.add(currentNode); //adding the first node
-		return path;
-	}
-
 	@Override
 	public graph copy() {
 		DGraph copy_Dgraph=new DGraph();

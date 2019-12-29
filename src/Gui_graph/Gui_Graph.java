@@ -201,6 +201,7 @@ public class Gui_Graph extends JFrame implements ActionListener
 	private void TSP() {
 		DGraph gra = new DGraph();
 		Graph_Algo gr = new Graph_Algo();
+		gr.init(this.graph);
 		ArrayList<Integer> targets = new ArrayList<Integer>();
 		String src = "";
 		do {
