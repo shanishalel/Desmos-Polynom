@@ -105,14 +105,22 @@ public class Gui_Graph extends JFrame implements ActionListener
 				g.drawString(Integer.toString(node_data.getKey()), p.ix(), p.iy()-1);
 				Collection<edge_data> Edge = this.graph.getE(node_data.getKey());
 				for (edge_data edge_data : Edge) {
+					if (edge_data.getTag() ==100) {
+						edge_data.setTag(0);
+						g.setColor(Color.RED);
+					}
+					else {
+						g.setColor(Color.BLUE);
+					}
 					node_data dest = graph.getNode(edge_data.getDest());
 					Point3D p2 = dest.getLocation();
-					g.setColor(Color.BLUE);
-					g.drawLine(p.ix(), p.iy(),
-							p2.ix(), p2.iy());
-					g.drawString(Double.toString(edge_data.getWeight()),(p.ix()+p2.ix())/2 , (p.iy()+p2.iy())/2);
-					g.setColor(Color.GREEN);
-					g.fillOval(p2.ix()-3, p2.iy()-3, 5, 5);
+					if (p2 != null) {
+						g.drawLine(p.ix(), p.iy(),
+								p2.ix(), p2.iy());
+						g.drawString(Double.toString(edge_data.getWeight()),(p.ix()+p2.ix())/2 , (p.iy()+p2.iy())/2);
+						g.setColor(Color.GREEN);
+						g.fillOval(p2.ix()-3, p2.iy()-3, 5, 5);	
+					}
 				}
 			}
 		}
@@ -121,110 +129,96 @@ public class Gui_Graph extends JFrame implements ActionListener
 	private void Savegraph() {
 		Graph_Algo gg = new Graph_Algo();
 		gg.init(this.graph);
-//		 parent component of the dialog
+		//		 parent component of the dialog
 		JFrame parentFrame = new JFrame();
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setDialogTitle("Specify a file to save");   
 		int userSelection = fileChooser.showSaveDialog(parentFrame);
-	
+
 		if (userSelection == JFileChooser.APPROVE_OPTION) {
-		    File fileToSave = fileChooser.getSelectedFile();
-		    String file= fileToSave.getAbsolutePath();
-			 gg.save(file);		
-		    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+			File fileToSave = fileChooser.getSelectedFile();
+			String file= fileToSave.getAbsolutePath();
+			gg.save(file);		
+			System.out.println("Save as file: " + fileToSave.getAbsolutePath());
 		}
-		
+
 	}
-	
+
 	private void Loadgraph() {
 		Graph_Algo gg = new Graph_Algo();
 		JFrame parentFrame = new JFrame();
 		JFileChooser fileChooser = new JFileChooser();
 		fileChooser.setDialogTitle("Specify a file to load");   
 		int userSelection = fileChooser.showOpenDialog(parentFrame);
-	
+
 		if (userSelection == JFileChooser.APPROVE_OPTION) {
-		    File fileToLoad = fileChooser.getSelectedFile();
-		    String file= fileToLoad.getAbsolutePath();
+			File fileToLoad = fileChooser.getSelectedFile();
+			String file= fileToLoad.getAbsolutePath();
 			gg.init(file);
 			repaint();
-		    System.out.println("Load from file: " + fileToLoad.getAbsolutePath());
+			System.out.println("Load from file: " + fileToLoad.getAbsolutePath());
 		}
 	}
-	
+
 	private void shortestPathDist() {
 		JFrame input = new JFrame();
 		String src = JOptionPane.showInputDialog(
-                null, "what is the key for src?");
+				null, "what is the key for src?");
 		String dest = JOptionPane.showInputDialog(
-                null, "what is the key for dest?");
+				null, "what is the key for dest?");
 		try {
-		Graph_Algo gg = new Graph_Algo();
-		gg.init(this.graph);
-		double ans = gg.shortestPathDist(Integer.parseInt(src), Integer.parseInt(dest));
-		String s = Double.toString(ans);	
-		JOptionPane.showMessageDialog(input, "the shortest distance is: " + s);
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-		}
-	
-	private void shortestPath() {
-		String src = JOptionPane.showInputDialog(
-                null, "what is the key for src?");
-		String dest = JOptionPane.showInputDialog(
-                null, "what is the key for dest?");
-		try {
-		Graph_Algo gg = new Graph_Algo();
-		gg.init(this.graph);
-		ArrayList<node_data> shortPath = new ArrayList<node_data>();
-		shortPath = (ArrayList<node_data>) gg.shortestPath(Integer.parseInt(src), Integer.parseInt(dest));
-		DGraph gra = new DGraph();
-		for (int i =0 ; i < shortPath.size() ; i++) {
-			gra.addNode(shortPath.get(i));
-		}
-		int j=0;
-		while ( j < shortPath.size()-1) {
-			gra.connect(shortPath.get(j).getKey(), shortPath.get(j+1).getKey(), (shortPath.get(j+1).getWeight()-shortPath.get(j).getWeight()) );
-		j++;
-		}
-		this.graph=gra;
-		repaint();
-		
+			Graph_Algo gg = new Graph_Algo();
+			gg.init(this.graph);
+			double ans = gg.shortestPathDist(Integer.parseInt(src), Integer.parseInt(dest));
+			String s = Double.toString(ans);	
+			JOptionPane.showMessageDialog(input, "the shortest distance is: " + s);
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
-	
+
+	private void shortestPath() {
+		String src = JOptionPane.showInputDialog(
+				null, "what is the key for src?");
+		String dest = JOptionPane.showInputDialog(
+				null, "what is the key for dest?");
+		try {
+			Graph_Algo gg = new Graph_Algo();
+			gg.init(this.graph);
+			ArrayList<node_data> shortPath = new ArrayList<node_data>();
+			shortPath = (ArrayList<node_data>) gg.shortestPath(Integer.parseInt(src), Integer.parseInt(dest));
+			for (int i =0 ; i+1 < shortPath.size() ; i++) {
+				this.graph.getEdge(shortPath.get(i).getKey(), shortPath.get(i+1).getKey()).setTag(100);
+			}
+			repaint();
+
+		}
+		catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 	private void TSP() {
-		DGraph gra = new DGraph();
 		Graph_Algo gr = new Graph_Algo();
 		gr.init(this.graph);
 		ArrayList<Integer> targets = new ArrayList<Integer>();
 		String src = "";
 		do {
 			src = JOptionPane.showInputDialog(
-	                null, "get a key if you want to Exit get in Exit");
+					null, "get a key if you want to Exit get in Exit");
 			if ((!src.equals("Exit"))) {
 				targets.add(Integer.parseInt(src));
 			}
 		}while(!src.equals("Exit"));
 		ArrayList<node_data> shortPath = new ArrayList<node_data>();
 		shortPath = (ArrayList<node_data>) gr.TSP(targets);
-		for (int i =0 ; i < shortPath.size() ; i++) {
-			gra.addNode(shortPath.get(i));
+		for (int i =0 ; i+1 < shortPath.size() ; i++) {
+			this.graph.getEdge(shortPath.get(i).getKey(), shortPath.get(i+1).getKey()).setTag(100);
 		}
-		int j=0;
-		while ( j < shortPath.size()-1) {
-			gra.connect(shortPath.get(j).getKey(), shortPath.get(j+1).getKey(), (shortPath.get(j+1).getWeight()-shortPath.get(j).getWeight()) );
-		j++;
-		}
-		this.graph=gra;
 		repaint();
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
