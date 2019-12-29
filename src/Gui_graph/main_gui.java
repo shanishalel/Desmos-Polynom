@@ -1,5 +1,6 @@
 package Gui_graph;
 
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Random;
 
@@ -15,9 +16,54 @@ public class main_gui {
 
 	public static void main(String[] args) {
 //		testmaybe();
-			test();
-			test2();
+//			test();
+//			test2();
 //			test3();
+			test4();
+//			test5();
+	}
+
+	private static void test5() {
+		DGraph d = new DGraph();
+		d.addNode(new Nodes(1, new Point3D(130, 130)));
+		d.addNode(new Nodes(2, new Point3D(200, 140)));
+		d.addNode(new Nodes(3, new Point3D(600, 600)));
+		d.addNode(new Nodes(4, new Point3D(100, 400)));
+		d.connect(1, 2, 3);
+		d.connect(2, 3, 4);
+		d.connect(4, 2, 1);
+//		Gui_Graph graph = new Gui_Graph(d);
+		ArrayList<Integer> targets = new ArrayList<Integer>();
+		targets.add(1);
+		targets.add(4);
+		Graph_Algo gg = new Graph_Algo();
+		gg.init(d);
+		gg.TSP(targets);
+		
+	}
+
+	private static void test4() {
+		DGraph d = new DGraph();
+		d.addNode(new Nodes(1, new Point3D(130, 130)));
+		d.addNode(new Nodes(2, new Point3D(200, 140)));
+		d.addNode(new Nodes(3, new Point3D(600, 600)));
+		d.addNode(new Nodes(4, new Point3D(100, 400)));
+		d.addNode(new Nodes(5, new Point3D(120, 300)));
+		d.connect(1, 2, 3);
+		d.connect(2, 5, 3);
+		d.connect(3, 1, 4);
+		d.connect(5, 3, 5);
+		d.connect(2, 3, 9);
+		d.connect(4, 5, 1);
+		Gui_Graph graph = new Gui_Graph(d);
+//		ArrayList<Integer> targets = new ArrayList<Integer>();
+//		targets.add(1);
+//		targets.add(5);
+//		targets.add(1);
+//		Graph_Algo gg = new Graph_Algo();
+//		gg.init(d);
+//		gg.TSP(targets);
+		
 	}
 
 	private static void test3() {

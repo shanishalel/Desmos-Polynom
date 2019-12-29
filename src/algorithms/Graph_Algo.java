@@ -232,61 +232,7 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 
 	/*we will create a function that start by calculate the shortes path between the first target
 	 * and we will use a function to check if we pass one of the nodes that we gets from the user .*/
-	@Override
-	public List<node_data> TSP(List<Integer> targets) {
-		List <Integer> KeyTSP= new ArrayList <Integer>(); 
-		List <node_data> pathTSP= new ArrayList <node_data>(); 
-		List <node_data> pathTSPTemp= new ArrayList <node_data>(); 
 
-		if(targets.size()==0) {
-			return pathTSP;
-		}
-		if(targets.size()==1) {
-			pathTSP.add(this.graph.getNode(targets.get(0)));
-			return pathTSP;
-		}
-		for(Integer integer: targets) {
-			KeyTSP.add(integer);
-		}
-		int start=0;
-		int start1=1;
-		boolean theFirst=true;
-		while(start1<targets.size()) {
-			if(KeyTSP.contains(targets.get(start))) {
-				if (KeyTSP.contains(targets.get(start1))){
-					if(theFirst) {
-						pathTSPTemp =Path( targets.get(start), targets.get(start1), KeyTSP);
-						theFirst=false;
-						int i=0;
-						while(i<pathTSPTemp.size()) { //adding all the path to the path of ans
-							pathTSP.add(pathTSPTemp.get(i)); 
-							i++;
-						}
-					}
-					else {
-						List<node_data>temp=Path( targets.get(start), targets.get(start1), KeyTSP);
-						//temp.remove(0);//cause we enteret him
-						int i=0;
-						while(i<temp.size()) {
-							pathTSP.add(temp.get(i)); 
-							i++;
-						}
-					}
-
-					start++;
-					start1++;
-				}
-				else {
-					start1++;
-				}
-			}
-			else {
-				start++;
-			}
-		}
-		return pathTSP;
-
-	}
 
 	/**
 	 * this function check if the node that we entered there src and dest are connected
@@ -303,6 +249,21 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		return true;
 	}
 
+	@Override
+	public List<node_data> TSP(List<Integer> targets) {
+		ArrayList<node_data> Path = new ArrayList<node_data>();
+		ArrayList<node_data> temp = new ArrayList<node_data>();
+		for (int i = 0; i+1 < targets.size(); i++) {
+			temp = (ArrayList<node_data>) shortestPath(targets.get(i), targets.get(i+1));
+			if (i > 0 ) {
+				temp.remove(0);
+			}
+			Path.addAll(temp);
+		}
+
+		
+		return Path;
+	}
 
 
 

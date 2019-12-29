@@ -83,9 +83,12 @@ public class Gui_Graph extends JFrame implements ActionListener
 		shortestPathDist.addActionListener(this);
 		MenuItem shortestPath = new MenuItem("shortest Path");
 		shortestPath.addActionListener(this);
+		MenuItem TSP = new MenuItem("TSP");
+		TSP.addActionListener(this);
 		graph_paint.add(Drawgraph);
 		graph_paint.add(shortestPathDist);
 		graph_paint.add(shortestPath);
+		graph_paint.add(TSP);
 	}
 
 	public void paint(Graphics g)
@@ -195,8 +198,32 @@ public class Gui_Graph extends JFrame implements ActionListener
 		}
 	}
 	
+	private void TSP() {
+		DGraph gra = new DGraph();
+		Graph_Algo gr = new Graph_Algo();
+		ArrayList<Integer> targets = new ArrayList<Integer>();
+		String src = "";
+		do {
+			src = JOptionPane.showInputDialog(
+	                null, "get a key if you want to Exit get in Exit");
+			if ((!src.equals("Exit"))) {
+				targets.add(Integer.parseInt(src));
+			}
+		}while(!src.equals("Exit"));
+		ArrayList<node_data> shortPath = new ArrayList<node_data>();
+		shortPath = (ArrayList<node_data>) gr.TSP(targets);
+		for (int i =0 ; i < shortPath.size() ; i++) {
+			gra.addNode(shortPath.get(i));
+		}
+		int j=0;
+		while ( j < shortPath.size()-1) {
+			gra.connect(shortPath.get(j).getKey(), shortPath.get(j+1).getKey(), (shortPath.get(j+1).getWeight()-shortPath.get(j).getWeight()) );
+		j++;
+		}
+		this.graph=gra;
+		repaint();
+	}
 	
-
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
@@ -212,6 +239,8 @@ public class Gui_Graph extends JFrame implements ActionListener
 		case "shortest Path Dist": shortestPathDist();
 		break;
 		case "shortest Path": shortestPath();
+		break;
+		case "TSP": TSP();
 		break;
 		default:
 			break;
