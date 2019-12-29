@@ -9,12 +9,24 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
+import java.io.File;
+import java.nio.file.Path;
+import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedList;
+import java.util.List;
 
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JTextArea;
+import javax.swing.JTextField;
+import javax.swing.filechooser.FileSystemView;
 
 import algorithms.Graph_Algo;
+import dataStructure.DGraph;
 import dataStructure.edge_data;
 import dataStructure.graph;
 import dataStructure.node_data;
@@ -103,20 +115,56 @@ public class Gui_Graph extends JFrame implements ActionListener
 	}
 
 	private void Savegraph() {
+		Graph_Algo gg = new Graph_Algo();
+		gg.init(this.graph);
+//		 parent component of the dialog
+		JFrame parentFrame = new JFrame();
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Specify a file to save");   
+		int userSelection = fileChooser.showSaveDialog(parentFrame);
+	
+		if (userSelection == JFileChooser.APPROVE_OPTION) {
+		    File fileToSave = fileChooser.getSelectedFile();
+		    String file= fileToSave.getAbsolutePath();
+			 gg.save(file);		
+		    System.out.println("Save as file: " + fileToSave.getAbsolutePath());
+		}
 		
 	}
 	
 	private void Loadgraph() {
-		
+		Graph_Algo gg = new Graph_Algo();
+		JFrame parentFrame = new JFrame();
+		JFileChooser fileChooser = new JFileChooser();
+		fileChooser.setDialogTitle("Specify a file to save");   
+		int userSelection = fileChooser.showOpenDialog(parentFrame);
+	
+		if (userSelection == JFileChooser.APPROVE_OPTION) {
+		    File fileToLoad = fileChooser.getSelectedFile();
+		    String file= fileToLoad.getAbsolutePath();
+			gg.init(file);
+		    System.out.println("Load from file: " + fileToLoad.getAbsolutePath());
+		}
 	}
 	
 	private void shortestPathDist() {
-		
+//		Graph_Algo gg = new Graph_Algo();
+//		gg.init(this.graph);
+//		double ans = gg.shortestPathDist(1, 6);
+//		String s = Double.toString(ans);
+//		 
+		 
+		 
 	}
 	
 	private void shortestPath() {
+//		Graph_Algo gg = new Graph_Algo();
+//		gg.init(this.graph);
+//		ArrayList<node_data> shortPath = new ArrayList<node_data>();
+//		shortPath = (ArrayList<node_data>) gg.shortestPath(1, 6);
 		
 	}
+	
 	
 
 	@Override
