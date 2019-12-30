@@ -4,7 +4,10 @@ This project and the following will used directed, weighted graph.
 
 DGraph:  
 * we describe a DGraph by hashtable that implements the nodes-Hashtable<Integer, node_data> Nodes,
-and hashtable inside hashtable the implements the edges	Hashtable<node_data, Hashtable<Integer, edge_data>>  Edge.  
+and hashtable inside hashtable the implements the edges	Hashtable<node_data, Hashtable<Integer, edge_data>>  Edge. 
+* if the user will entered a node or data that is existent in the graph the previous node will deleted and the new one will replace it.  
+* negative weight isn't vaild !   
+* if the user will entered to the edge constructor 2 equals key the function won't do nothing
 
 Graph_Algo : 
 * we derscrib the a Graph_Algo by graph graph.  
