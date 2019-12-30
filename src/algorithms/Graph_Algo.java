@@ -101,9 +101,12 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		return false;
 	}
 
-
-
-	/*this function will return the number of nodes she can gets to*/
+/**
+ * this function will return the number of nodes she can gets to
+ * @param current
+ * @param size
+ * @return
+ */
 	private int NodeCanGetTo ( node_data current, int size) {
 		Collection<edge_data> neighbors=graph.getE(current.getKey()); //the neighbors of current  
 		for(edge_data edge:neighbors) {
@@ -118,6 +121,7 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		return size;
 	}
 
+	
 	@Override
 	public double shortestPathDist(int src, int dest) {
 		setWeight(src);
@@ -197,7 +201,6 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 	 */
 
 	private void setWeight(int src) {
-		//run alll over the hashtable and initialized the weight and the tag to 0
 		Collection <node_data> nodes = this.graph.getV();
 		for (node_data Collection : nodes) {
 			Collection.setWeight(999999999);
@@ -234,9 +237,6 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		}
 	}
 
-
-	/*we will create a function that start by calculate the shortes path between the first target
-	 * and we will use a function to check if we pass one of the nodes that we gets from the user .*/
 
 
 	/**

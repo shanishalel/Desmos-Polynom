@@ -2,9 +2,7 @@ package dataStructure;
 
 public class Edges implements edge_data, java.io.Serializable {
 	
-	/**
-	 * 
-	 */
+	
 	private static final long serialVersionUID = -6012857914742052453L;
 	private node_data SRC;
 	private node_data DEST;

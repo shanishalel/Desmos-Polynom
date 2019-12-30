@@ -320,9 +320,9 @@ class DGraphTest {
 		d.connect(3, 4, 2);
 		d.connect(5, 4, 5);
 		d.connect(2, 5, 1);
-		d.connect(4, 6 ,7);
+		d.connect(4, 5 ,7);
 		assertEquals(d.getMC(), 14);
-		d.removeEdge(4, 6);
+		d.removeEdge(4, 5);
 		d.removeNode(0);
 		assertEquals(d.getMC(), 16);
 	}

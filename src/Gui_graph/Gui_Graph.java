@@ -36,9 +36,7 @@ import utils.Point3D;
 public class Gui_Graph extends JFrame implements ActionListener
 {
 
-	/**
-	 * 
-	 */
+	
 	private graph graph;
 	private static final long serialVersionUID = 6128157318970002904L;
 	LinkedList<Point3D> points = new LinkedList<Point3D>();
@@ -91,6 +89,9 @@ public class Gui_Graph extends JFrame implements ActionListener
 		graph_paint.add(TSP);
 	}
 
+	/**
+	 * this function will paint the graph
+	 */
 	public void paint(Graphics g)
 	{
 		super.paint(g);
@@ -129,6 +130,9 @@ public class Gui_Graph extends JFrame implements ActionListener
 		}
 	}
 
+	/**
+	 * this function will save a graph to file
+	 */
 	private void Savegraph() {
 		Graph_Algo gg = new Graph_Algo();
 		gg.init(this.graph);
@@ -146,7 +150,10 @@ public class Gui_Graph extends JFrame implements ActionListener
 		}
 
 	}
-
+	
+	/**
+	 * this function will load a graph and paint it 
+	 */
 	private void Loadgraph() {
 		Graph_Algo gg = new Graph_Algo();
 		JFrame parentFrame = new JFrame();
@@ -163,6 +170,9 @@ public class Gui_Graph extends JFrame implements ActionListener
 		}
 	}
 
+	/**
+	 * the function will operate the shortest path dist and return the distance 
+	 */
 	private void shortestPathDist() {
 		JFrame input = new JFrame();
 		String src = JOptionPane.showInputDialog(
@@ -181,6 +191,10 @@ public class Gui_Graph extends JFrame implements ActionListener
 		}
 	}
 
+	/**
+	 * the function will operate the shortest path and return the shortest path to the user 
+	 * and paint the path in red color
+	 */
 	private void shortestPath() {
 		JFrame input = new JFrame();
 		String s = "";
@@ -208,6 +222,11 @@ public class Gui_Graph extends JFrame implements ActionListener
 		}
 		}
 	}
+	
+	/**
+	 * the function will operate the tsp function, return the user the shortest path and paint 
+	 * the path in red color
+	 */
 
 	private void TSP() {
 		JFrame input = new JFrame();

@@ -12,7 +12,7 @@ import dataStructure.graph;
 import dataStructure.node_data;
 import utils.Point3D;
 
-public class main_gui {
+public class Testing_gui {
 
 	public static void main(String[] args) {
 //		testmaybe();

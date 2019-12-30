@@ -16,8 +16,8 @@ public class DGraph implements graph, java.io.Serializable{
 	private int countEdge;
 	//this hash will represents the node
 	Hashtable<Integer, node_data> Nodes;
-	
-	/*The hash represent an edges by Hashtable<node_data, Hashtable<Integer, edge_data>>   */
+
+	//The hash represent an edges by Hashtable<node_data, Hashtable<Integer, edge_data>>   
 	Hashtable<node_data, Hashtable<Integer, edge_data>>  Edge;
 
 	public DGraph() {
@@ -52,12 +52,14 @@ public class DGraph implements graph, java.io.Serializable{
 			return;
 		}
 		if (w < 0) {
-		throw new RuntimeException("You cant get a negative wight");
+			throw new RuntimeException("You cant get a negative wight");
 		}
-		edge_data edge = new Edges(Nodes.get(src) , Nodes.get(dest), w);
-		Edge.get(Nodes.get(src)).put(dest, edge);
-		this.countEdge++;
-		MC++;
+		if (Nodes.containsKey(src) && Nodes.containsKey(dest)) {
+			edge_data edge = new Edges(Nodes.get(src) , Nodes.get(dest), w);
+			Edge.get(Nodes.get(src)).put(dest, edge);
+			this.countEdge++;
+			MC++;
+		}
 	}
 
 	@Override
@@ -69,8 +71,8 @@ public class DGraph implements graph, java.io.Serializable{
 	public Collection<edge_data> getE(int node_id) {
 		return 	Edge.get(Nodes.get(node_id)).values();
 	}
-	
-	
+
+
 	@Override
 	public node_data removeNode(int key) {
 		/*we will run on the Hashtable of the edges and check for every edge if the source or the dest is 
@@ -80,7 +82,7 @@ public class DGraph implements graph, java.io.Serializable{
 		for (node_data node_data : nodes) {
 			edge_data check = Edge.get(node_data).remove(key);
 			if (check != null ) {
-			this.countEdge--;
+				this.countEdge--;
 			}
 		}
 		this.countEdge -= Edge.get(to_remove).size();

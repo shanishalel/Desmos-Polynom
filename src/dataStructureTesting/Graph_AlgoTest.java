@@ -80,74 +80,26 @@ class Graph_AlgoTest implements java.io.Serializable {
 
 	@Test
 	void testIsConnected() {
-//		DGraph d = new DGraph();
-//		int j=1;
-//		for (int i =1 ; i<=5 ;i++){
-//			Point3D p = new Point3D(j, j, j);
-//			Nodes n = new Nodes(i , p);
-//			d.addNode(n);
-//		}
-//		d.connect(1, 2, 3);
-//		d.connect(2, 5, 1);
-//		d.connect(2, 3, 7);
-//		d.connect(5, 1, 2);
-//		d.connect(3, 4, 5);
-//		d.connect(4, 1, 1);
-//		Graph_Algo graph = new Graph_Algo();
-//		graph.init(d);
-//		if(!graph.isConnected()) {
-//			fail();
-//		}
-//		
-//		Timestamp timestamp = new Timestamp(System.currentTimeMillis());
-//		System.out.println(timestamp);
-//		graph test = MillionVertex();
-//		Timestamp timestamp2 = new Timestamp(System.currentTimeMillis());
-//		System.out.println(timestamp2);
-//		Graph_Algo gM = new Graph_Algo();
-//		gM.init(test);
-//		Timestamp timestamp3 = new Timestamp(System.currentTimeMillis());
-//		System.out.println(timestamp3);
-//		System.out.println(gM.isConnected());
-//		Timestamp timestamp4 = new Timestamp(System.currentTimeMillis());
-//		System.out.println(timestamp4);
-//	}
-//	
-//	graph MillionVertex()
-//	{
-//		graph graph = new DGraph();
-//		Random rand = new Random();
-//		for (int i = 1; i <= 10000; i++) {
-//			Point3D p = new Point3D(rand.nextInt(600), rand.nextInt(600));
-//			graph.addNode(new Nodes(i,p));
-//		}
-//		for (int i = 1; i <= 10000-3; i++) {
-//			graph.connect(i, i+1, 30);
-//			graph.connect(i, i+2, 30);
-//			graph.connect(i, i+3, 30);
-//			graph.connect(i, i+4, 30);
-			//graph.connect(i, i+5, 30);
-//		}
-//		graph.connect(9997, 1, 30);
-//		graph.connect(9998, 1, 30);
-//		graph.connect(9999, 1, 30);
-//		Collection<node_data> nd = graph.getV();
-//		for (node_data node_data : nd) {
-//			//System.out.println(node_data.getKey());
-//			for(int i=0;i<5;i++)
-//			{
-//				int dest = rand.nextInt(100000);
-//				while(dest != node_data.getKey())
-//				{
-//					dest = rand.nextInt(100000);
-//				}
-//				double weight = rand.nextDouble();
-//				weight*= 100;
-//				graph.connect(node_data.getKey(), dest, weight);
-//			}
-//		}
-		
-//		return graph;
+		DGraph d = new DGraph();
+		/* create d graph that is connect graph  */
+		int j=1;
+		for (int i =1 ; i<=5 ;i++){
+			Point3D p = new Point3D(j, j, j);
+			Nodes n = new Nodes(i , p);
+			d.addNode(n);
+		}
+		d.connect(1, 2, 3);
+		d.connect(2, 5, 1);
+		d.connect(2, 3, 7);
+		d.connect(5, 1, 2);
+		d.connect(3, 4, 5);
+		d.connect(4, 1, 1);
+		Graph_Algo graph = new Graph_Algo();
+		graph.init(d);
+		if(!graph.isConnected()) {
+			fail();
+		}
+
 	}
 
 	@Test
@@ -197,6 +149,7 @@ class Graph_AlgoTest implements java.io.Serializable {
 		assertEquals(s, "1-->2-->5-->3");
 		
 	}
+	
 
 	@Test
 	void testTSP() {
