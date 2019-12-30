@@ -73,8 +73,10 @@ public class DGraph implements graph, java.io.Serializable{
 		node_data to_remove=Nodes.get(key); //the node that we need to remove
 		Set <node_data> nodes = Edge.keySet();
 		for (node_data node_data : nodes) {
-			Edge.get(node_data).remove(key);
+			edge_data check = Edge.get(node_data).remove(key);
+			if (check != null ) {
 			this.countEdge--;
+			}
 		}
 		this.countEdge -= Edge.get(to_remove).size();
 		Edge.remove(to_remove);
@@ -86,10 +88,12 @@ public class DGraph implements graph, java.io.Serializable{
 	@Override
 	public edge_data removeEdge(int src, int dest) {
 		node_data srcNode= Nodes.get(src); //get the node_data of src
-		this.countEdge--;
-		this.MC++;
-		return Edge.get(srcNode).remove(dest); //remove the edge that start from src and ends in dest
-		
+		edge_data ans = Edge.get(srcNode).remove(dest); //remove the edge that start from src and ends in dest
+		if ( ans != null ) {
+			this.countEdge--;
+			this.MC++;
+		}
+		return ans;
 	}
 
 	@Override

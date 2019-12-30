@@ -2,10 +2,13 @@ package dataStructureTesting;
 
 import static org.junit.jupiter.api.Assertions.*;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
+import algorithms.Graph_Algo;
 import dataStructure.DGraph;
 import dataStructure.Nodes;
 import dataStructure.edge_data;
@@ -32,7 +35,7 @@ class DGraphTest {
 	void testGetEdge() {
 		DGraph d = new DGraph();
 		int j=1;
-		for(int i=1;i<10;i++ ) { //the key can't be 0  
+		for(int i=1;i<10;i++ ) {  
 			Point3D p = new Point3D(j,j,j);
 			Nodes n=new Nodes(i,p);
 			d.addNode(n);
@@ -54,16 +57,50 @@ class DGraphTest {
 
 	}
 
+//	@Test
+//	void TestAvi() {
+//		DGraph g = new DGraph();
+//
+//		Point3D p1 = new Point3D(0,0);
+//
+//		for (int i = 1; i <= 1000000 ; i++) {
+//		node_data t = new Nodes( i, new Point3D(p1.x()+i , p1.y()+i ,p1.z()+i ));
+//		g.addNode(t);
+//
+//		}
+//
+//		for (int i = 1; i <= 1000000-10 ; i++) {
+//		g.connect(i, i+1, i*0.5);
+//		g.connect(i, i+2, i*0.3);
+//		g.connect(i, i+3, 1);
+//		g.connect(i, i+4, i*10);
+//		g.connect(i, i+5, i*3);
+//		g.connect(i, i+6, i*0.8);
+//		g.connect(i, i+7, i*0.5);
+//		g.connect(i, i+8, i*7);
+//		g.connect(i, i+9, i*3);
+//		g.connect(i, i+10, i*2.5);
+//		}
+//
+//		Graph_Algo test = new Graph_Algo();
+//		test.init(g);
+//
+//		System.out.println(test.shortestPathDist(1,20));
+//
+//	}
+	
 	@Test
 	void testAddNode() {
 		DGraph d = new DGraph();
 		int j=1;
-		for (int i =1 ; i<=10000000 ;i++){
-			Point3D p = new Point3D(j, j, j);
+		Point3D p = new Point3D(j, j, j);
+		for (int i =1 ; i<=1000000 ;i++){
 			Nodes n = new Nodes(i , p);
 			d.addNode(n);
 		}
-		System.out.println(d.nodeSize());
+		if (!(d.nodeSize() == 1000000)) {
+			fail();
+		}
 	}
 
 	@Test
@@ -188,16 +225,44 @@ class DGraphTest {
 	void testRemoveEdge() {
 		DGraph d = new DGraph();
 		int j=1;
-		for (int i =1 ; i<10 ;i++){
+		for (int i =0 ; i<10 ;i++){
 			Point3D p = new Point3D(j, j, j);
 			Nodes n = new Nodes(i , p);
 			d.addNode(n);
 		}
-		for(int i =1 ; i <d.nodeSize() ;i++) {
+		for(int i =0 ; i <d.nodeSize() ;i++) {
 			if ( d.nodeSize() > 1+i) {
 			d.connect(i, i+1, i);
 			}
 		}
+		d.removeEdge(1, 2);
+		if (d.edgeSize() != 8 ) {
+			fail();
+		}
+		d.removeEdge(1, 3);
+		if (d.edgeSize() != 8 ) {
+			fail();
+		}
+	}
+	
+	@Test
+	void testRemoveNodeEdge() {
+		DGraph d = new DGraph();
+		int j=1;
+		Point3D p = new Point3D(j, j, j);
+		for (int i =1 ; i<=6 ;i++){
+			Nodes n = new Nodes(i , p);
+			d.addNode(n);
+			}
+		d.connect(1, 2, 1);
+		d.connect(2, 3, 7);
+		d.connect(3, 4, 2);
+		d.connect(5, 4, 5);
+		d.connect(2, 5, 1);
+		d.connect(4, 6 ,7);
+		assertEquals(d.edgeSize(), 6);
+		d.removeNode(2);
+		assertEquals(d.edgeSize(), 3);
 		
 	}
 

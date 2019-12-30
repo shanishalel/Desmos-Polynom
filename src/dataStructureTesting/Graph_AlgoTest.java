@@ -202,7 +202,7 @@ class Graph_AlgoTest implements java.io.Serializable {
 	@Test
 	void testTSP() {
 		DGraph d = new DGraph();
-		List <Integer> targets = new ArrayList();
+		List <Integer> targets = new ArrayList<Integer>();
 		int j=1;
 		for (int i =1 ; i<=6 ;i++){
 			Point3D p = new Point3D(j, j, j);

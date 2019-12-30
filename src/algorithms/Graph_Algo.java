@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
+import java.nio.file.Path;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
@@ -214,6 +215,10 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		}
 		else {
 			ArrayList<node_data> shortPath = new ArrayList<node_data>();
+			if (dest == src ) {
+			shortPath.add(0,graph.getNode(src));
+			return shortPath;
+			}
 			setWeight(src);
 			Dijkstras(src);
 			String info = graph.getNode(dest).getInfo();
@@ -253,15 +258,25 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 	public List<node_data> TSP(List<Integer> targets) {
 		ArrayList<node_data> Path = new ArrayList<node_data>();
 		ArrayList<node_data> temp = new ArrayList<node_data>();
+		if ( targets.size() == 0) return null;
+		if ( targets.size() == 1) {
+			node_data node = graph.getNode(targets.get(0));
+			Path.add(node);
+			return Path;
+		}
 		for (int i = 0; i+1 < targets.size(); i++) {
+			if (targets.get(i) ==  targets.get(i+1)) {
+				targets.remove(i);
+				i--;
+			}
+			else {
 			temp = (ArrayList<node_data>) shortestPath(targets.get(i), targets.get(i+1));
 			if (i > 0 ) {
 				temp.remove(0);
 			}
 			Path.addAll(temp);
+			}
 		}
-
-		
 		return Path;
 	}
 
@@ -279,7 +294,6 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 			Collection<edge_data> Edges = this.graph.getE(node_data.getKey());
 			for(edge_data edge_data: Edges ) {
 				copy_Dgraph.connect(edge_data.getSrc(), edge_data.getDest(), edge_data.getWeight());
-
 			}
 
 		}

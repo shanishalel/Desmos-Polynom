@@ -179,10 +179,13 @@ public class Gui_Graph extends JFrame implements ActionListener
 	}
 
 	private void shortestPath() {
+		JFrame input = new JFrame();
+		String s = "";
 		String src = JOptionPane.showInputDialog(
 				null, "what is the key for src?");
 		String dest = JOptionPane.showInputDialog(
 				null, "what is the key for dest?");
+		if (!src.equals(dest)) {
 		try {
 			Graph_Algo gg = new Graph_Algo();
 			gg.init(this.graph);
@@ -190,20 +193,26 @@ public class Gui_Graph extends JFrame implements ActionListener
 			shortPath = (ArrayList<node_data>) gg.shortestPath(Integer.parseInt(src), Integer.parseInt(dest));
 			for (int i =0 ; i+1 < shortPath.size() ; i++) {
 				this.graph.getEdge(shortPath.get(i).getKey(), shortPath.get(i+1).getKey()).setTag(100);
+				s+= shortPath.get(i).getKey() + "--> ";
 			}
+			s+= shortPath.get(shortPath.size()-1).getKey();
 			repaint();
+			JOptionPane.showMessageDialog(input, "the shortest path is: " +s);
 
 		}
 		catch (Exception e) {
 			e.printStackTrace();
 		}
+		}
 	}
 
 	private void TSP() {
+		JFrame input = new JFrame();
 		Graph_Algo gr = new Graph_Algo();
 		gr.init(this.graph);
 		ArrayList<Integer> targets = new ArrayList<Integer>();
 		String src = "";
+		String s = "";
 		do {
 			src = JOptionPane.showInputDialog(
 					null, "get a key if you want to Exit get in Exit");
@@ -213,10 +222,15 @@ public class Gui_Graph extends JFrame implements ActionListener
 		}while(!src.equals("Exit"));
 		ArrayList<node_data> shortPath = new ArrayList<node_data>();
 		shortPath = (ArrayList<node_data>) gr.TSP(targets);
-		for (int i =0 ; i+1 < shortPath.size() ; i++) {
-			this.graph.getEdge(shortPath.get(i).getKey(), shortPath.get(i+1).getKey()).setTag(100);
+		if (shortPath != null ) {
+			for (int i =0 ; i+1 < shortPath.size() ; i++) {
+				this.graph.getEdge(shortPath.get(i).getKey(), shortPath.get(i+1).getKey()).setTag(100);
+				s+= shortPath.get(i).getKey() + "--> ";
+			}
+			s+= shortPath.get(shortPath.size()-1).getKey();
+			repaint();
+			JOptionPane.showMessageDialog(input, "the shortest path is: " +s);
 		}
-		repaint();
 	}
 
 	@Override
