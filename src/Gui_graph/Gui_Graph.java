@@ -102,7 +102,8 @@ public class Gui_Graph extends JFrame implements ActionListener
 				Point3D p = node_data.getLocation();
 				g.setColor(Color.ORANGE);
 				g.fillOval(p.ix(), p.iy(), 10, 10);
-				g.drawString(Integer.toString(node_data.getKey()), p.ix(), p.iy()-1);
+				g.setColor(Color.BLACK);
+				g.drawString(Integer.toString(node_data.getKey()), p.ix()+1, p.iy()-2);
 				Collection<edge_data> Edge = this.graph.getE(node_data.getKey());
 				for (edge_data edge_data : Edge) {
 					if (edge_data.getTag() ==100) {
@@ -118,8 +119,10 @@ public class Gui_Graph extends JFrame implements ActionListener
 						g.drawLine(p.ix(), p.iy(),
 								p2.ix(), p2.iy());
 						g.drawString(Double.toString(edge_data.getWeight()),(p.ix()+p2.ix())/2 , (p.iy()+p2.iy())/2);
-						g.setColor(Color.GREEN);
-						g.fillOval(p2.ix()-3, p2.iy()-3, 5, 5);	
+						g.setColor(Color.MAGENTA);
+						int x_place =((((((p.ix()+p2.ix())/2)+p2.ix())/2)+p2.ix())/2);
+						int y_place = ((((((p.iy()+p2.iy())/2)+p2.iy())/2)+p2.iy())/2);
+						g.fillOval(x_place, y_place, 5, 5);	
 					}
 				}
 			}

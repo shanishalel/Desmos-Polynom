@@ -2,13 +2,10 @@ package dataStructureTesting;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 import org.junit.jupiter.api.Test;
 
-import algorithms.Graph_Algo;
 import dataStructure.DGraph;
 import dataStructure.Nodes;
 import dataStructure.edge_data;
@@ -29,6 +26,17 @@ class DGraphTest {
 				fail("Not the same node");
 			}
 		}
+	}
+	
+	@Test
+	void buildSameNode() {
+		DGraph d = new DGraph();
+		int j=1;
+		Point3D p = new Point3D(j,j,j);
+		Nodes n=new Nodes(1,p);
+		d.addNode(n);
+		d.addNode(n);
+		assertEquals(d.nodeSize(), 1);
 	}
 
 	@Test
@@ -300,7 +308,26 @@ class DGraphTest {
 
 	@Test
 	void testGetMC() {
-		fail("Not yet implemented");
+		DGraph d = new DGraph();
+		int j=1;
+		Point3D p = new Point3D(j, j, j);
+		for (int i = 0; i < 6; i++) {
+			Nodes n = new Nodes(i , p);
+			d.addNode(n);
+		}
+		assertEquals(d.getMC(), 6);
+		d.connect(0, 1, 1);
+		d.connect(2, 0, 1);
+		d.connect(1, 2, 1);
+		d.connect(2, 3, 7);
+		d.connect(3, 4, 2);
+		d.connect(5, 4, 5);
+		d.connect(2, 5, 1);
+		d.connect(4, 6 ,7);
+		assertEquals(d.getMC(), 14);
+		d.removeEdge(4, 6);
+		d.removeNode(0);
+		assertEquals(d.getMC(), 16);
 	}
 
 }
