@@ -28,6 +28,20 @@ class DGraphTest {
 		}
 	}
 	
+	@Test 
+	void testGetNodeNoKey() {
+		DGraph d = new DGraph();
+		int j=1;
+		for(int i=1;i<3;i++ ) { //the key can't be 0  
+			Point3D p = new Point3D(j,j,j);
+			Nodes n=new Nodes(i,p);
+			d.addNode(n);
+		}
+		if ( d.getNode(11) != null ) {
+			fail();
+		}
+	}
+	
 	@Test
 	void buildSameNode() {
 		DGraph d = new DGraph();
@@ -64,38 +78,6 @@ class DGraphTest {
 		}
 
 	}
-
-//	@Test
-//	void TestAvi() {
-//		DGraph g = new DGraph();
-//
-//		Point3D p1 = new Point3D(0,0);
-//
-//		for (int i = 1; i <= 1000000 ; i++) {
-//		node_data t = new Nodes( i, new Point3D(p1.x()+i , p1.y()+i ,p1.z()+i ));
-//		g.addNode(t);
-//
-//		}
-//
-//		for (int i = 1; i <= 1000000-10 ; i++) {
-//		g.connect(i, i+1, i*0.5);
-//		g.connect(i, i+2, i*0.3);
-//		g.connect(i, i+3, 1);
-//		g.connect(i, i+4, i*10);
-//		g.connect(i, i+5, i*3);
-//		g.connect(i, i+6, i*0.8);
-//		g.connect(i, i+7, i*0.5);
-//		g.connect(i, i+8, i*7);
-//		g.connect(i, i+9, i*3);
-//		g.connect(i, i+10, i*2.5);
-//		}
-//
-//		Graph_Algo test = new Graph_Algo();
-//		test.init(g);
-//
-//		System.out.println(test.shortestPathDist(1,20));
-//
-//	}
 	
 	@Test
 	void testAddNode() {
@@ -120,7 +102,7 @@ class DGraphTest {
 			Nodes n = new Nodes(i , p);
 			d.addNode(n);
 		}
-		for(int i =1 ; i <=d.nodeSize() ;i++) {
+		for(int i =2 ; i <=d.nodeSize() ;i++) {
 			d.connect(1, i, i);
 			try {
 				d.getEdge(1, i);
@@ -128,10 +110,25 @@ class DGraphTest {
 			catch(Exception e) {
 				fail(); //shouldn't throw exception
 			}
-			if(d.edgeSize()!=i) {
-				fail();
-			}
 		}
+		if(d.edgeSize()!=9) {
+			fail();
+		}
+	}
+	
+	@Test 
+	void testCoonectSameSrcDest() {
+		DGraph d = new DGraph();
+		int j=1;
+		Point3D p = new Point3D(j, j, j);
+		for (int i =1 ; i<=3 ;i++){
+			Nodes n = new Nodes(i , p);
+			d.addNode(n);
+		}
+		d.connect(1, 2, 3);
+		assertEquals(d.getEdge(1, 2).getWeight(), 3);
+		d.connect(1, 2, 4);
+		assertEquals(d.getEdge(1, 2).getWeight(), 4);
 	}
 
 	@Test
@@ -297,7 +294,7 @@ class DGraphTest {
 			Nodes n = new Nodes(i , p);
 			d.addNode(n);
 		}
-		for(int i =1 ; i <d.nodeSize() ;i++) {
+		for(int i =2 ; i <=d.nodeSize() ;i++) {
 			d.connect(1, i, i);
 		}
 		//1->2, 1->3, 1->4, 1->5, 1->6, 1->7, 1->8, 1->9

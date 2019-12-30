@@ -48,6 +48,12 @@ public class DGraph implements graph, java.io.Serializable{
 
 	@Override
 	public void connect(int src, int dest, double w) {
+		if (src==dest) {
+			return;
+		}
+		if (w < 0) {
+		throw new RuntimeException("You cant get a negative wight");
+		}
 		edge_data edge = new Edges(Nodes.get(src) , Nodes.get(dest), w);
 		Edge.get(Nodes.get(src)).put(dest, edge);
 		this.countEdge++;
@@ -65,7 +71,6 @@ public class DGraph implements graph, java.io.Serializable{
 	}
 	
 	
-	//finished
 	@Override
 	public node_data removeNode(int key) {
 		/*we will run on the Hashtable of the edges and check for every edge if the source or the dest is 
@@ -84,7 +89,6 @@ public class DGraph implements graph, java.io.Serializable{
 		return Nodes.remove(key);
 	}
 
-	//the function isn't right
 	@Override
 	public edge_data removeEdge(int src, int dest) {
 		node_data srcNode= Nodes.get(src); //get the node_data of src

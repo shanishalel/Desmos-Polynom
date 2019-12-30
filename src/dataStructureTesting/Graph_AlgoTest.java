@@ -174,59 +174,61 @@ class Graph_AlgoTest implements java.io.Serializable {
 	@Test
 	void testShortestPath() {
 		DGraph d = new DGraph();
-		int j=1;
-		for (int i =1 ; i<=6 ;i++){
-			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p);
-			d.addNode(n);
-		}
+		d.addNode(new Nodes(1, new Point3D(130, 130)));
+		d.addNode(new Nodes(2, new Point3D(200, 140)));
+		d.addNode(new Nodes(3, new Point3D(600, 600)));
+		d.addNode(new Nodes(4, new Point3D(100, 400)));
+		d.addNode(new Nodes(5, new Point3D(120, 300)));
 		d.connect(1, 2, 3);
-		d.connect(1, 3, 1);
-		d.connect(2, 3, 7);
-		d.connect(3, 4, 2);
-		d.connect(2, 4, 5);
-		d.connect(2, 6, 1);
-		d.connect(4, 6 ,7);
-		Graph_Algo graph = new Graph_Algo();
-		graph.init(d);
-		try {
-			System.out.println(graph.shortestPath(1, 6));
+		d.connect(2, 5, 3);
+		d.connect(3, 1, 4);
+		d.connect(5, 3, 5);
+		d.connect(2, 3, 9);
+		d.connect(4, 5, 1);
+		Graph_Algo gg = new Graph_Algo();
+		gg.init(d);
+		ArrayList<node_data> ans = new ArrayList<node_data>();
+		ans = (ArrayList<node_data>) gg.shortestPath(1, 3);
+		String s="";
+		for (int i = 0; i+1 < ans.size(); i++) {
+			s+= ans.get(i).getKey() + "-->";
 		}
-		catch(Exception e) {
-			System.out.println("good");
-		}
+		s+= ans.get(ans.size()-1).getKey();
+		assertEquals(s, "1-->2-->5-->3");
 		
 	}
 
-	//should be : 1,2,3,4,5
 	@Test
 	void testTSP() {
 		DGraph d = new DGraph();
-		List <Integer> targets = new ArrayList<Integer>();
-		int j=1;
-		for (int i =1 ; i<=6 ;i++){
-			Point3D p = new Point3D(j, j, j);
-			Nodes n = new Nodes(i , p);
-			targets.add(n.getKey());
-			d.addNode(n);
-			}
-		
-		d.connect(1, 3, 1);
-		d.connect(2, 3, 7);
-		d.connect(3, 4, 2);
-		d.connect(2, 4, 5);
-		d.connect(2, 6, 1);
-		d.connect(4, 6 ,7);
-		Graph_Algo graph = new Graph_Algo();
-		graph.init(d);
-		System.out.println("the shorts path"+graph.shortestPathDist(1,2));
-		try {
-		graph.TSP(targets);
+		d.addNode(new Nodes(1, new Point3D(130, 130)));
+		d.addNode(new Nodes(2, new Point3D(200, 140)));
+		d.addNode(new Nodes(3, new Point3D(600, 600)));
+		d.addNode(new Nodes(4, new Point3D(100, 400)));
+		d.addNode(new Nodes(5, new Point3D(120, 300)));
+		d.connect(1, 2, 3);
+		d.connect(2, 5, 3);
+		d.connect(3, 1, 4);
+		d.connect(5, 3, 5);
+		d.connect(2, 3, 9);
+		d.connect(4, 5, 1);
+		ArrayList<Integer> targets = new ArrayList<Integer>();
+		targets.add(1);
+		targets.add(1);
+		targets.add(2);
+		targets.add(5);
+		targets.add(5);
+		targets.add(1);
+		Graph_Algo gg = new Graph_Algo();
+		gg.init(d);
+		ArrayList<node_data> ans = new ArrayList<node_data>();
+		ans = (ArrayList<node_data>) gg.TSP(targets);
+		String s="";
+		for (int i = 0; i+1 < ans.size(); i++) {
+			s+= ans.get(i).getKey() + "-->";
 		}
-		catch(Exception e) {
-			System.out.println("good");
-		}
-	
+		s+= ans.get(ans.size()-1).getKey();
+		assertEquals(s, "1-->2-->5-->3-->1");
 	}
 
 	@Test

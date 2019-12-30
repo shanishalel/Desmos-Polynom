@@ -55,7 +55,7 @@ public class main_gui {
 		d.connect(5, 3, 5);
 		d.connect(2, 3, 9);
 		d.connect(4, 5, 1);
-		Gui_Graph graph = new Gui_Graph(d);
+//		Gui_Graph graph = new Gui_Graph(d);
 //		ArrayList<Integer> targets = new ArrayList<Integer>();
 //		targets.add(1);
 //		targets.add(5);
