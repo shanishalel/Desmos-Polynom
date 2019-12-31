@@ -77,6 +77,8 @@ public class Gui_Graph extends JFrame implements ActionListener
 		// graph up
 		MenuItem Drawgraph = new MenuItem("Draw graph");
 		Drawgraph.addActionListener(this);
+		MenuItem isConnected = new MenuItem("is Connected");
+		isConnected.addActionListener(this);
 		MenuItem shortestPathDist = new MenuItem("shortest Path Dist");
 		shortestPathDist.addActionListener(this);
 		MenuItem shortestPath = new MenuItem("shortest Path");
@@ -84,6 +86,7 @@ public class Gui_Graph extends JFrame implements ActionListener
 		MenuItem TSP = new MenuItem("TSP");
 		TSP.addActionListener(this);
 		graph_paint.add(Drawgraph);
+		graph_paint.add(isConnected);
 		graph_paint.add(shortestPathDist);
 		graph_paint.add(shortestPath);
 		graph_paint.add(TSP);
@@ -254,6 +257,20 @@ public class Gui_Graph extends JFrame implements ActionListener
 			JOptionPane.showMessageDialog(input, "the shortest path is: " +s);
 		}
 	}
+	
+	private void isConnected() {
+		JFrame input = new JFrame();
+		Graph_Algo gr = new Graph_Algo();
+		gr.init(this.graph);
+		boolean ans = gr.isConnected();
+		if (ans == true) {
+			JOptionPane.showMessageDialog(input, "this graph is connected");
+		}
+		else {
+			JOptionPane.showMessageDialog(input, "the graph is not connected");
+		}
+		
+	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) 
@@ -267,6 +284,8 @@ public class Gui_Graph extends JFrame implements ActionListener
 		break;
 		case "Load graph": Loadgraph();
 		break;
+		case "is Connected": isConnected();
+		break;
 		case "shortest Path Dist": shortestPathDist();
 		break;
 		case "shortest Path": shortestPath();
@@ -278,5 +297,6 @@ public class Gui_Graph extends JFrame implements ActionListener
 
 		}
 	}
+
 
 }

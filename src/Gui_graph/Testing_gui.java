@@ -19,9 +19,26 @@ public class Testing_gui {
 //			test();
 //			test2();
 //			test3();
-			test4();
+//			test4();
 //			test5();
+		test6();
 	}
+	
+	
+
+	private static void test6() {
+		DGraph d = new DGraph();
+		d.addNode(new Nodes(1, new Point3D(130, 130)));
+		d.addNode(new Nodes(2, new Point3D(200, 140)));
+		d.addNode(new Nodes(3, new Point3D(600, 600)));
+		d.connect(1, 2, 3);
+		d.connect(2, 3, 4);
+		d.connect(3, 1, 1);
+		Gui_Graph graph = new Gui_Graph(d);
+		
+	}
+
+
 
 	private static void test5() {
 		DGraph d = new DGraph();
@@ -32,13 +49,13 @@ public class Testing_gui {
 		d.connect(1, 2, 3);
 		d.connect(2, 3, 4);
 		d.connect(4, 2, 1);
-//		Gui_Graph graph = new Gui_Graph(d);
-		ArrayList<Integer> targets = new ArrayList<Integer>();
-		targets.add(1);
-		targets.add(4);
-		Graph_Algo gg = new Graph_Algo();
-		gg.init(d);
-		gg.TSP(targets);
+		Gui_Graph graph = new Gui_Graph(d);
+//		ArrayList<Integer> targets = new ArrayList<Integer>();
+//		targets.add(1);
+//		targets.add(4);
+//		Graph_Algo gg = new Graph_Algo();
+//		gg.init(d);
+//		gg.TSP(targets);
 		
 	}
 
