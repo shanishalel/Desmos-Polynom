@@ -1,4 +1,4 @@
-package gui;
+package dataStructureTesting;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -10,6 +10,7 @@ import dataStructure.DGraph;
 import dataStructure.Nodes;
 import dataStructure.graph;
 import dataStructure.node_data;
+import gui.Gui_Graph;
 import utils.Point3D;
 
 public class Testing_gui {
