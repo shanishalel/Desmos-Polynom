@@ -1,4 +1,4 @@
-package Gui_graph;
+package gui;
 
 import java.util.ArrayList;
 import java.util.Collection;
