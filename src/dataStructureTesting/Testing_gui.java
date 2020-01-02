@@ -21,8 +21,8 @@ public class Testing_gui {
 //			test2();
 //			test3();
 //			test4();
-//			test5();
-		test6();
+			test5();
+//		test6();
 	}
 	
 	
@@ -51,12 +51,12 @@ public class Testing_gui {
 		d.connect(2, 3, 4);
 		d.connect(4, 2, 1);
 		Gui_Graph graph = new Gui_Graph(d);
-//		ArrayList<Integer> targets = new ArrayList<Integer>();
-//		targets.add(1);
-//		targets.add(4);
-//		Graph_Algo gg = new Graph_Algo();
-//		gg.init(d);
-//		gg.TSP(targets);
+		ArrayList<Integer> targets = new ArrayList<Integer>();
+		targets.add(1);
+		targets.add(4);
+		Graph_Algo gg = new Graph_Algo();
+		gg.init(d);
+		gg.TSP(targets);
 		
 	}
 

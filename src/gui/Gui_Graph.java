@@ -256,6 +256,9 @@ public class Gui_Graph extends JFrame implements ActionListener
 			repaint();
 			JOptionPane.showMessageDialog(input, "the shortest path is: " +s);
 		}
+		if(shortPath==null) {
+			JOptionPane.showMessageDialog(input, "the shortest path is: null ");
+		}
 	}
 	
 	private void isConnected() {

@@ -266,7 +266,7 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 		ArrayList<node_data> Path = new ArrayList<node_data>();
 		ArrayList<node_data> temp = new ArrayList<node_data>();
 		if ( targets.size() == 0) return null;
-		if ( targets.size() == 1) {
+		try{if ( targets.size() == 1) {
 			node_data node = graph.getNode(targets.get(0));
 			Path.add(node);
 			return Path;
@@ -285,6 +285,10 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 			}
 		}
 		return Path;
+	}
+		catch(Exception e) {
+			return null;
+		}
 	}
 
 	@Override
