@@ -221,7 +221,7 @@ public class Gui_Graph extends JFrame implements ActionListener
 
 		}
 		catch (Exception e) {
-			e.printStackTrace();
+			JOptionPane.showMessageDialog(input, "the shortest path is: null" );
 		}
 		}
 	}

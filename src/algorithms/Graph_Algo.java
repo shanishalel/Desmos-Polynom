@@ -220,10 +220,8 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 
 	@Override
 	public List<node_data> shortestPath(int src, int dest) {
-		if(!connected(src,dest)) {
-			throw new RuntimeException(" The edges that you entered aren't connected ");
-		}
-		else {
+		try {
+			connected(src,dest);
 			ArrayList<node_data> shortPath = new ArrayList<node_data>();
 			if (dest == src ) {
 			shortPath.add(0,graph.getNode(src));
@@ -242,6 +240,10 @@ public class Graph_Algo implements graph_algorithms, java.io.Serializable{
 			}
 			return shortPath;
 		}
+		catch(Exception e) {
+			return null;
+		}
+		
 	}
 
 
