@@ -16,9 +16,9 @@ Graph_Algo :
 she will return false.
 * the function "shortestPathDist" check if there is a shortest path between the 2 node_data that we entered here by setweight and
 dijkstras function. setweight function set all the weight of the nodes to infinty and the tag to 0.  than we pass all the nodes with 
-dijkstras algorithm . the function will return the distance between them. if there aren't path between them she will return infinty. 
+dijkstras algorithm . the function will return the distance between them. if there aren't path between them she will return infinty(999999.8E) . 
 * the function "shortestPath" check if there is a shortest path between the 2 node_data that we enetered there key as listed earlier, 
-this function will throws exception if there isn't a path between the 2 noes that we gets. this function retrurn a list of node_data that is
+this function will return "null" if there isn't a path between the 2 noes that we gets. this function retrurn a list of node_data that is
 the shortest path.
 * the function "TSP" check if there is a short path between a list of keys of nodes that she gets by ask for the shortest path between 2 nodes 
-each time, she will return the path that is the shortest by List <node_data> . if there isn't a path between 2 nodes she will throws exception.  
+each time, she will return the path that is the shortest by List <node_data> . if there isn't a path between 2 nodes she will return "null".
