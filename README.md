@@ -1,4 +1,4 @@
-# OOP--Ex2
+# Desmos-Polynom
 In this project we will start an infrastructure for the next projects.
 This project and the following will used directed, weighted graph. 
 
